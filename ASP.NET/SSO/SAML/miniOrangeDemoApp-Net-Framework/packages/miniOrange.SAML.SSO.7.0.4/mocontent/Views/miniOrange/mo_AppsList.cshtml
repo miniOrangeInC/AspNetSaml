@@ -1,0 +1,844 @@
+﻿@using miniOrange.saml;
+@using Newtonsoft.Json;
+@model miniOrange.saml.Model.AppListModel;
+
+
+<html>
+<head>
+    <title></title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/mo_maincss.css" asp-append-version="true" />
+   
+    <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="Stylesheet" href="main.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/js/bootstrap.min.js" integrity="sha512-5BqtYqlWfJemW5+v+TZUs22uigI8tXeVah5S/1Z6qBLVO7gakAOtkOzUtgq6dsIo5c0NJdmGPs0H9I+2OHUHVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/miniOrangeContent/Scripts/Appslist.js" asp-append-version="true"></script>
+</head>
+
+<body onload="click_application_list()">
+
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <script>
+        function click_application_list() {
+            var firstinstall = "@Model.FirstInstall";
+            console.log("firstinstall>" + firstinstall);
+            if (firstinstall == "false") {
+                document.getElementById("app_list_btn").click();
+            }
+            else {
+                document.getElementById("hts_btn").click();
+            }
+        }
+    </script>
+    <main class="app-content" style="margin-left:0px;">
+
+        <div class="app-title" style="margin-top: -84px;">
+            <div>
+                <h1><img src="https://plugins.miniorange.com/wp-content/uploads/2022/05/dnn-miniorange-guide-logo.webp" style="width:6%; margin-right: 0.375em;" />miniOrange ASP.NET SAML SSO Middleware v7.0.4</h1>
+            </div>
+            <div class="drpdwn" style="margin-left: 33%;">
+                <button class="dropbtn">
+                    <div style="display:flex;">
+                        <i class="fa fa-user fa-lg" style="margin-top:2%;"></i>
+                        <span style="margin-left: 10px;"> @Model.AdminEmail</span>
+                    </div>
+                </button>
+                <div class="drpdwn-content">
+                    <a href="@Model.Baseurl?ssoaction=config&option=logout">Logout</a>
+                    <a href="@Model.Baseurl?ssoaction=config&tab=account">Account Setup</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 tile" style="margin-top:-1em;">
+            @if (Model.IsTrialLicenseExpired)
+            {
+                <div class="alert alert-danger" role="alert" style="margin-bottom: 0em; border-color: #880e44;">
+                    <center>
+                        <div style="justify-content: center; font-size: 18px; margin-bottom: 0.375em;">
+                            <i class="bx bxs-info-circle"></i>
+                            <strong>Trial License Expired !!</strong>
+                        </div>
+                        <strong>Thanks for using miniOrange SAML SP Middleware.</strong>
+                        Your trial period has <strong>expired</strong>.
+                        To continue using the SSO service you need to upgrade your license. You can check our pricing detials using this
+                        <b><a target="_blank" href="https://plugins.miniorange.com/asp-net-saml-single-sign-on-sso#plans">LINK</a></b>
+                    </center>
+                </div>
+            }
+            else
+            {
+                <div class="info_tour" role="alert" style="margin-bottom: 0em;border-color: #108395; padding-block: 1em; padding-left: 0; margin-left: 0; background:#dfedfa;">
+                    <span style="margin-left: 1em;">This middleware has a trial period of <strong>14 days</strong>. Your trial period will expires on: <strong>@Model.Expiry_Date</strong>.</span>
+                </div>
+            }
+
+        </div>
+        <div style='margin-top: -1em; padding:0;' class='col-md-8'>
+
+            <div style='display:flex;' aria-label='Basic example'>
+                <div id='app_list_btn' style='border-left: 2px solid #509ba7; border-top-left-radius: 5px' onclick='show_application_list()' class='flexed_items'><i class='bx bx-shield-quarter' style='font-size: 18px; font-weight: bolder;'></i> Identity Provider Settings</div>
+                <div id='sp_list_btn' onclick='send_to_sp_settings()' class='flexed_items'><i class='bx bxs-data' style='font-size: 18px; font-weight: bolder;'></i> Service Provider Settings</div>
+                <div id='hts_btn' onclick='send_to_hts_settings()' class='flexed_items'><span style='margin-left:2em;'><i class='bx bxs-info-square' style='font-size: 18px; font-weight: bolder;'></i> How to Setup</span></div>
+                <div id='plan_btn' style='border-right: 2px solid #509ba7; border-top-right-radius: 5px;' onclick='send_to_plan_settings()' class='flexed_items'><span style='margin-left:2em;'><i class='bx bxs-briefcase-alt-2' style='font-size: 18px; font-weight: bolder;'></i> Licensing Plans</span></div>
+
+            </div>
+            <script>
+
+                function send_to_sp_settings() {
+                    var hide_application_list = document.getElementById('application_list_tab');
+                    hide_application_list.style.display = 'none';
+                    var sp_setting = document.getElementById('sp_setting_tab');
+                    sp_setting.style.display = 'block';
+                    var hts_setting = document.getElementById('hts_tab');
+                    hts_setting.style.display = 'none';
+                    var plan_setting = document.getElementById('plan_setting_tab');
+                    plan_setting.style.display = 'none';
+                    var clicked_element = document.getElementById('sp_list_btn');
+                    clicked_element.style.background = 'rgb(2,0,36)';
+                    clicked_element.style.background = 'linear-gradient(22deg, rgb(112 143 205) 2%, rgb(55 185 212) 92%, rgb(135 156 226) 100%)';
+
+                    var not_clicked_ele = document.getElementById('app_list_btn');
+                    not_clicked_ele.style.background = 'white';
+                    var not_clicked_ele2 = document.getElementById('hts_btn');
+                    not_clicked_ele2.style.background = 'white';
+                    var not_clicked_ele_3 = document.getElementById('plan_btn');
+                    not_clicked_ele_3.style.background = 'white';
+                    clicked_element.style.color = 'white';
+                    not_clicked_ele.style.color = 'rgb(2 109 127)';
+                    not_clicked_ele2.style.color = 'rgb(2 109 127)';
+                    not_clicked_ele_3.style.color = 'rgb(2 109 127)';
+                }
+
+                function show_application_list() {
+                    var hide_application_list = document.getElementById('application_list_tab');
+                    var sp_setting = document.getElementById('sp_setting_tab');
+                    var clicked_element = document.getElementById('app_list_btn');
+
+                    clicked_element.style.background = 'rgb(2,0,36)';
+                    clicked_element.style.background = 'linear-gradient(22deg, rgb(112 143 205) 2%, rgb(55 185 212) 92%, rgb(135 156 226) 100%)';
+                    var not_clicked_ele = document.getElementById('sp_list_btn');
+                    not_clicked_ele.style.background = 'white';
+                    var not_clicked_ele2 = document.getElementById('hts_btn');
+                    not_clicked_ele2.style.background = 'white';
+                    hide_application_list.style.display = 'block';
+                    sp_setting.style.display = 'none';
+                    var hts_setting = document.getElementById('hts_tab');
+                    hts_setting.style.display = 'none';
+                    var not_clicked_ele_3 = document.getElementById('plan_btn');
+                    not_clicked_ele_3.style.background = 'white';
+                    var plan_setting = document.getElementById('plan_setting_tab');
+                    plan_setting.style.display = 'none';
+
+                    clicked_element.style.color = 'white';
+                    not_clicked_ele.style.color = 'rgb(2 109 127)';
+                    not_clicked_ele2.style.color = 'rgb(2 109 127)';
+                    not_clicked_ele_3.style.color = 'rgb(2 109 127)';
+
+                }
+
+                function send_to_hts_settings() {
+                    var hts_setting = document.getElementById('hts_tab');
+                    hts_setting.style.display = 'block';
+                    var hide_application_list = document.getElementById('application_list_tab');
+                    hide_application_list.style.display = 'none';
+                    var sp_setting = document.getElementById('sp_setting_tab');
+                    sp_setting.style.display = 'none';
+                    var plan_setting = document.getElementById('plan_setting_tab');
+                    plan_setting.style.display = 'none';
+                    var see_more_content = document.getElementById('see_more_content');
+                    see_more_content.style.display = 'none';
+
+                    var see_more_btn = document.getElementById('more_btn');
+
+                    see_more_btn.style.display = 'block';
+
+                    var clicked_element = document.getElementById('hts_btn');
+
+                    clicked_element.style.background = 'rgb(2,0,36)';
+                    clicked_element.style.background = 'linear-gradient(22deg, rgb(112 143 205) 2%, rgb(55 185 212) 92%, rgb(135 156 226) 100%)';
+                    var not_clicked_ele = document.getElementById('app_list_btn');
+                    not_clicked_ele.style.background = 'white';
+                    var not_clicked_ele2 = document.getElementById('sp_list_btn');
+                    not_clicked_ele2.style.background = 'white';
+                    var not_clicked_ele_3 = document.getElementById('plan_btn');
+                    not_clicked_ele_3.style.background = 'white';
+
+                    clicked_element.style.color = 'white';
+                    not_clicked_ele.style.color = 'rgb(2 109 127)';
+                    not_clicked_ele2.style.color = 'rgb(2 109 127)';
+                    not_clicked_ele_3.style.color = 'rgb(2 109 127)';
+                }
+
+                function send_to_plan_settings() {
+                    var hide_application_list = document.getElementById('application_list_tab');
+                    hide_application_list.style.display = 'none';
+                    var sp_setting = document.getElementById('sp_setting_tab');
+                    sp_setting.style.display = 'none';
+                    var hts_setting = document.getElementById('hts_tab');
+                    hts_setting.style.display = 'none';
+                    var plan_setting = document.getElementById('plan_setting_tab');
+                    plan_setting.style.display = 'block';
+
+                    var not_clicked_element = document.getElementById('sp_list_btn');
+                    not_clicked_element.style.background = 'white';
+                    var not_clicked_ele = document.getElementById('app_list_btn');
+                    not_clicked_ele.style.background = 'white';
+                    var not_clicked_ele2 = document.getElementById('hts_btn');
+                    not_clicked_ele2.style.background = 'white';
+                    var clicked_ele = document.getElementById('plan_btn');
+
+                    clicked_ele.style.background = 'rgb(2,0,36)';
+                    clicked_ele.style.background = 'linear-gradient(22deg, rgb(112 143 205) 2%, rgb(55 185 212) 92%, rgb(135 156 226) 100%)';
+                    clicked_ele.style.color = 'white';
+                    not_clicked_ele.style.color = 'rgb(2 109 127)';
+                    not_clicked_ele2.style.color = 'rgb(2 109 127)';
+                    not_clicked_element.style.color = 'rgb(2 109 127)';
+
+                }
+
+                function see_more() {
+                    var see_more_content = document.getElementById('see_more_content');
+                    var see_more_btn = document.getElementById('more_btn');
+                    see_more_content.style.display = 'block';
+                    see_more_btn.style.display = 'none';
+                }
+            </script>
+
+            <div class="row">
+                <div class="col-md-12" style="display: flex; gap:1em;">
+                    <div class="tile col-md-12">
+
+                        <div class="modal" id="spentitychangemodal" style="display: none;width: 45%;margin-left: 30%;margin-top: 15%;background: white;padding: 2%;height: 320px;border-radius: 1%;border: 5px solid #84aad1;">
+                        <div style="margin-top: -26px;">
+                            <div style="display:flex;justify-content:space-between">
+                                    <h5 style="color: #085966; margin-top: 1.75em;">Edit Metadata</h5>
+                                    <input type="button" value="X" id="closespmodal" class="btn btn-primary" style="height:36px;margin-top:20px;background:#84aad1"/>
+                            </div>
+                            <div>
+                                    <form method="post" action="@Model.Baseurl?ssoaction=config">
+                                            <input type="hidden" name="option" value="savespchanges"/>
+                                            <table id="customers" style="width: 100%; margin-top:20px; margin-bottom:2em; height:33%;">
+                                                <tbody><tr>
+                                                    <th>Metadata Attribute</th>
+                                                    <th>Metadata Value</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>SP Entity ID</td>
+                                                    <input type="hidden" id="newappid" name="appkeys[]" value="" />
+                                                    <td><input type="text" id="newspentityid" name="sp_keys[]" value="" style="margin:0;width: 100%;height:30px;"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ACS URL</td>
+                                                    <td>@Model.ACSURL</td>
+            </tr>
+                                                <tr>
+                                                    <td>SAML Logout URL</td>
+                                                    <td>@Model.SPLogoutURL</td>
+            </tr>
+                                            </tbody>
+                                    </table>
+                                    <div style="text-align:center;margin-top:-10px;"><input type="submit" class="btn btn-primary" name="Submitbtn" value="Save"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        <script>
+                                var closebtn= document.getElementById("closespmodal");
+                                closebtn.addEventListener("click", ()=> {document.getElementById("spentitychangemodal").style.display ="none";})
+                        </script>
+                        </div>
+                        
+
+                        <div class='row' id='application_list_tab' style='padding-inline: 1em; margin-top: -2em;'>
+
+                            <div>
+                                <form id='form1' action='@Model.Baseurl?ssoaction=config&tab=appslist' method='post'>
+                                    @Html.AntiForgeryToken()
+                                    <h3 style='color: #085966; margin-top: 1.375em; margin-bottom: 1em;'>Configured Applications:</h3> <input type='hidden' id='base_url_input_field' value='@Model.Baseurl' />
+                                    <div id='tableLandlord' style=''>
+                                        <table style='border-spacing: 15px; width: 97%;margin-top: 10px;margin-left: 7px;' border='1'>
+                                            <tr style='font-weight: 650; color:#085966;'>
+                                                <td style='text-align:center;'>App ID</td>
+                                                <td style='text-align:center;'>IDP Entity ID</td>
+                                                <td colspan='2' style='text-align:center;'>Action</td>
+                                            </tr>
+                                            @if (Model.Apps_Dict == null || Model.Apps_Dict.Count < 1)
+                                            {
+                                                <tr><td colspan='3' style='text-align:center;'>No Apps Configured</td></tr>
+                                            }
+                                            else if (Model.Apps_Dict != null)
+                                            {
+                                                foreach (var app in Model.Apps_Dict)
+                                                {
+                                                    Dictionary<string, string> idpconfig = JsonConvert.DeserializeObject<Dictionary<string, string>>(app.Value);
+                                                    string isMultitenant = idpconfig["isMultitenant"];
+                                                    <tr>
+                                                        <td style='text-align:center;'>@app.Key</td>
+                                                        <td style='text-align:center;'>@idpconfig["idp_issuer"]</td>
+                                                        <td style='text-align:center; padding: 0'>
+                                                            <form>
+                                                                @Html.AntiForgeryToken()
+                                                                <input id='deleteidp' type='hidden' value='@Model.Baseurl?ssoaction=config&action=delete&appid=@app.Key' />
+                                                                <input id='ssolink_@app.Key' type='hidden' value='@Model.Baseurl?ssoaction=login&appid=@app.Key' />
+                                                                <input id='appid_@app.Key' type='hidden' value='@app.Key' />
+                                                                <select class='form-select' style='border-color: transparent; background: white; padding: 0;' aria-label='Select Actions' id='action_selected_@app.Key' onchange='redirection_on_option_active("@app.Key", "@isMultitenant")'>
+                                                                    <option selected disabled>Select Actions</option>
+                                                                    <option value="1" id="option1_@app.Key">Edit Configuration</option>
+                                                                    <option value="3" id="option2_@app.Key">Test Configuration</option>
+                                                                    <option value="4" id="option3_@app.Key">Copy SSO Link</option>
+                                                                    <option value="6" id="option4" disabled><i class="bx bx-crown" style="color:golden;"></i>Disable SSO</option>
+                                                                    <option value="5" id="delte_app" style="color: orangered; font-weight:bold;" id="delete_app_@app.Key">Delete App</option>
+                                                                </select>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <tr><td colspan='3' style='text-align:center;'>No Apps Configured</td></tr>
+                                            }
+                                        </table>
+                                        @if (Model.IsTrialLicenseExpired)
+                                        {
+                                            <center>
+                                                <div class='tooltipx'>
+                                                    <input type='submit' disabled value='Add new IdP' class='btn btn-primary' style='margin-top: 1.4em; width: 12em; height: 3.1em;'>
+                                                    <span class='tooltiptextx' style='--widthx : 400px'>Your trial license has expired !!</span>
+                                                </div>
+                                            </center>
+
+                                        }
+                                        else
+                                        {
+                                            if (Model.Apps_Dict != null)
+                                            {
+                                                if (Model.Apps_Dict.Count < 1)
+                                                {
+                                                    <center><input type='submit' value='Add new IdP' class='btn btn-primary' style='margin-top: 1.4em; width: 12em; height: 3.1em;'></center>
+                                                }
+                                                else
+                                                {
+                                                    <center>
+                                                        <div class='tooltipx'>
+                                                            <input type='submit' disabled value='Add new IdP' class='btn btn-primary' style='margin-top: 1.4em; width: 12em; height: 3.1em;'>
+                                                            <span class='tooltiptextx' style='--widthx : 400px'>You will only be able to configure ONE IdP in trial version of the plugin</span>
+                                                        </div>
+                                                    </center>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <center>
+                                                    <input type='submit' value='Add new IdP' class='btn btn-primary' style=' margin-top: 1.4em; width: 12em; height: 3.1em;'>
+                                                </center>
+                                            }
+                                        }
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                        <div id='sp_setting_tab' style='margin-top: -3em;'>
+                            @if (!(Model.Apps_Dict == null || Model.Apps_Dict.Count < 1))
+                            {
+                                bool isMultiTenantAppPresent = false;
+                                <h3 style="color: #085966; margin-top: 1.75em;">Custom Service Provider Metadata:</h3>
+                                <div id="sp_setting_content">
+                                    <div id="tableLandlord" style="">
+                                        <table style="border-spacing: 15px; width: 97%;margin-top: 26px;margin-left: 7px;" border="1">
+                                            <tr style="font-weight: 650; color:#085966;">
+                                                <td style="text-align:center;">App ID</td>
+                                                <td style="text-align:center;">SP Entity ID</td>
+                                                <td style="text-align:center;">ACS URL</td>
+                                                <td colspan="2" style="text-align:center;">Action</td>
+                                            </tr>
+                                            @if (Model.Apps_Dict.Count == 0)
+                                            {
+                                                <tr>
+                                                    <td colspan="3" style="text-align:center;">No Apps Configured</td>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                @foreach (var app in Model.Apps_Dict)
+                                                {
+
+                                                    Dictionary<string, string> idpconfig = JsonConvert.DeserializeObject<Dictionary<string, string>>(app.Value);
+                                                    if (idpconfig["isMultitenant"] == "true")
+                                                    {
+                                                        isMultiTenantAppPresent = true;
+                                                    }
+
+                                                    <tr>
+                                                        <td style="text-align:center;">@app.Key</td>
+                                                        <td style="text-align:center;">@idpconfig["spissuer"]</td>
+                                                        <td style="text-align:center;">@Model.ACSURL</td>
+                                                        <td style="text-align:center; padding: 0">
+                                                                <input id="deleteidp" type="hidden" value="@Model.Baseurl?ssoaction=config&action=delete&appid=@app.Key"/>
+                                                                <input id="ssolink_@app.Key" type="hidden" value="@Model.Baseurl?ssoaction=login&appid=@app.Key"/>
+                                                                <input id="appid_@app.Key" type="hidden" value="@app.Key"/>
+                                                                <select class="form-select" style="border-color: transparent; background: white; padding: 0;" aria-label="Select Actions" id="spaction_selected_@app.Key" onchange='service_provider_setting_on_option_active("@app.Key","@idpconfig["spissuer"]");'>
+                                                                    <option selected disabled>Select Actions</option>
+                                                                    <option value="1" id="option1_@app.Key">Download Metadata XML</option>
+                                                                    <option value="2" id="option2_@app.Key">Metadata URL</option>
+                                                                    @if (idpconfig["isMultitenant"] == "true")
+                                                                    {
+                                                                        <option value="3" id="option3_@app.Key">Edit/View Metadata</option>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <option disabled="disabled" value="3" id="option3_@app.Key">Edit/View Metadata</option>
+                                                                    }
+                                                                </select>
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                }
+                                            }
+                                        </table>
+                                    </div>
+                                </div>
+                                <h3 style="color: #085966; margin-top: 1.75em;">Default Service Provider Metadata:</h3>
+                                <p>
+                                    Provide this plugin information to your Identity Provider team. You can choose any one of the below options:
+                                    <br><br>
+                                    <b>a) Provide this metadata URL to your Identity Provider:  </b> <code onclick="redirect_to_same_page();"><a style="background-color:rgba(0,0,0,.07);font-size:10pt;" target="_blank" href="@Model.Baseurl?ssoaction=metadata">@Model.Baseurl?ssoaction=metadata</a></code><br>
+                                </p>
+                                <div style="font-size:12px;text-align:center;"></div>
+                                <div>
+                                    <b>
+                                        b) Download metadata file: &nbsp;</b>
+
+                                        <a href='@Model.Baseurl?ssoaction=config&option=download'>Download</a>&nbsp;&nbsp<div data-toggle='tooltip' title='Upload this XML file when asked for SP Metadata by your Identity Provider App' class='fa fa-question-circle'></div>
+                                </div>
+
+                                <br>
+                                <b><p>c) Provide the following information to your Identity Provider</p></b>
+                                <table id="customers" style="width: 100%; margin-top:20px; margin-bottom:2em; height:33%;">
+                                                <tr>
+                                                    <th>Metadata Attribute</th>
+                                                    <th>Metadata Value</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Base URL</td>
+                                                    <td>@Model.Baseurl</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>SP Entity ID</td>
+                                                    <td>@Model.Baseurl</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ACS URL</td>
+                                                    <td>@Model.ACSURL</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>SAML Logout URL</td>
+                                                    <td>@Model.SPLogoutURL</td>
+                                                </tr>
+                                </table>
+                            }
+                            else
+                            {
+                                <h3 style="color: #085966; margin-top: 1.75em;">Default Service Provider Metadata:</h3>
+                                <div id="sp_setting_content">
+                                    <div class="trial-border">
+                                        <div class="hovertext1" data-hover="The features listed below are available in the Premium+ version of the module. To find out more, kindly click the crown icon.">
+                                            <div class="hovertext1" data-hover="The features listed below are available in the Premium+ version of the module. To find out more, kindly click the crown icon.">
+                                                <label for="base" style="font-weight:bold; font-size:15px;">Change Base URL</label>
+                                                <a class="prem tags" style="position: absolute; right: -8px; font-size:16px; margin-top: -14px; color: goldenrod;" target="_blank" href="https://plugins.miniorange.com/asp-dot-net-saml-2-0-single-sign-sso-connector#plans"><img src="https://i.ibb.co/nzFYw3v/crown-1.png" style="width:40px; height:40px;"></a>
+                                                <input type="text" class="form-inline" name="base_url" id="base" style="width: 94%; margin-bottom: 5px;" readonly placeholder="SP Baseurl" value="@Model.Baseurl"/>
+                                                <input type="submit" value="Change" class="btn btn-primary" style="margin-top: 7px; height:38px; margin-top:10px;" disabled/>
+                                            </div>
+                                        </div>
+
+                                        </div>
+                                        <script>function redirect_to_same_page() { click_application_list(); }</script>
+                                        <br>
+                                        <p>
+                                            Provide this plugin information to your Identity Provider team. You can choose any one of the below options:
+                                            <br><br>
+                                            <b>a) Provide this metadata URL to your Identity Provider:  </b> <code onclick="redirect_to_same_page();"><a style="background-color:rgba(0,0,0,.07);font-size:10pt;" target="_blank" href="@Model.Baseurl?ssoaction=metadata">@Model.Baseurl?ssoaction=metadata</a></code><br>
+                                        </p>
+                                    <div style="font-size:12px;text-align:center;"></div>
+                                    <div>
+                                        <b>b) Download metadata file: &nbsp;</b>
+                                            <a href="@Model.Baseurl?ssoaction=config&option=download">Download</a>&nbsp;&nbsp<div data-toggle="tooltip" title="Upload this XML file when asked for SP Metadata by your Identity Provider App" class="fa fa-question-circle"></div>
+                                    </div>
+                                    <br>
+
+                                    <b><p>c) Provide the following information to your Identity Provider</p></b>
+                                    <table id="customers" style="width: 100%; margin-top:20px; margin-bottom:2em; height:30%;">
+                                        <tr>
+                                            <th>Metadata Attribute</th>
+                                            <th>Metadata Value</th>
+                                        </tr>
+                                        <tr>
+                                            <td>SP Entity ID</td>
+                                            <td>@Model.Baseurl</td>
+                                        </tr>
+                                        <tr>
+                                            <td>ACS URL</td>
+                                            <td>@Model.ACSURL</td>
+                                        </tr>
+                                        <tr>
+                                            <td>SAML Logout URL</td>
+                                            <td>@Model.SPLogoutURL</td>
+                                        </tr>
+                                        </table>
+                                </div>
+                            }
+                        </div>
+                        <div id='plan_setting_tab' style='margin-top: -3em;'>
+                            <h3 style='color: #085966; margin-top: 1.75em; margin-left:0.75em;'>Licensing Plans</h3>
+                            <p style='margin-left:1.7em; font-weight: 500;'>
+                                <span>* Click on the <b>Buy Now</b> button for your preferred license plan and log in again with this middleware's credentials to complete the license purchase.</span>
+                                <span><br>* If you have any license related query please reach out to us at <span style='color: rgb(2, 109, 127);'><b>aspnetsupport@xecurify.com</b></span></span>
+                            </p>
+                            <div id='sp_setting_content'>
+                                <a style='display:none;' id='mobacktoaccountsetup' href='@Model.Baseurl?ssoaction=config&tab=accountsetup'>Back</a>
+                                <input type='hidden' value='@Model.IsCustomerRegistered' id='mo_customer_registered' />
+                                <form style='display:none;' id='loginform' action='@Model.MO_SAML_HOSTNAME/moas/login' target='_blank' method='post'>
+                                    @Html.AntiForgeryToken()
+                                    <input type='email' name='username' value='@Model.AdminEmail' />
+                                    <input type='text' name='redirectUrl' value='@Model.MO_SAML_HOSTNAME/moas/initializepayment' />
+                                    <input type='text' name='requestOrigin' id='requestOrigin' />
+                                </form>
+                                <script type='text/javascript'>
+                                    function upgradeform(planType) {
+                                        if (planType === '') {
+                                            location.href = 'https://plugins.miniorange.com/asp-dot-net-saml-2-0-single-sign-sso-connector/';
+                                            return;
+                                        } else {
+                                            jQuery('#requestOrigin').val(planType);
+                                            if (jQuery('#mo_customer_registered').val() == 'True') {
+
+                                                jQuery('#loginform').submit();
+                                            }
+                                            else {
+                                                location.href = jQuery('#mobacktoaccountsetup').attr('href');
+                                            }
+                                        }
+
+                                    }
+                                </script>
+                                <div style='display:flex;' class='justify-content-center mx-15'>
+                                    <!-- Licensing Plans -->
+                                    <!-- Premium Plan -->
+                                    <div class='col-md-6 moct-align-center'>
+                                        <div class='moc-licensing-plan card-body'>
+                                            <!-- Plan Header -->
+                                            <div class='moc-licensing-plan-header'>
+                                                <div class='moc-licensing-plan-name'>PREMIUM</div>
+                                                <div class='moc-licensing-plan-price'><sup>$</sup>449<sup>*</sup></div>
+                                            </div>
+                                            <center><button style='background: linear-gradient(22deg, rgb(112 143 205) 2%, rgb(55 185 212) 92%, rgb(135 156 226) 100%); width: 89%; border: 2px solid #0a5d7b; color: white;' class='btn btn-block text-uppercase moc-lp-buy-btn' onclick=upgradeform('asp_net_saml_premium_plan')>Buy Now</button></center>
+
+                                            <!-- Plan Header End -->
+                                            <!-- Plan Feature List -->
+                                            <div class='moc-licensing-plan-feature-list'>
+                                                <ul style='padding-left: 19px; padding-right: 19px;'>
+                                                    <li>&#9989;&emsp;Unlimited Authentications Support</li>
+                                                    <li>&#9989;&emsp;Basic Attribute Mapping(Username)</li>
+                                                    <li>&#9989;&emsp;Custom Redirect URL After Login</li>
+                                                    <li>&#9989;&emsp;Step by Step Guides<br></li>
+                                                    <li>&#9989;&emsp;Login link</li>
+                                                    <li>&#9989;&emsp;Protect Complete Site</li>
+                                                    <li>&#9989;&emsp;Advanced Attribute Mapping<br>&nbsp;&nbsp;&nbsp;(Email,Firstname, Lastname)</li>
+                                                    <li>&#9989;&emsp;SAML Single Logout</li>
+                                                    <li>&#9989;&emsp;Custom Attribute Mapping</li>
+                                                    <li>&#9989;&emsp;Customize SP configuration</li>
+                                                    <li>&#9989;&emsp;Use different Binding type</li>
+                                                    <li>&#9989;&emsp;Custom redirect URL after logout</li>
+                                                    <li>&#9989;&emsp;Basic Role Mapping</li>
+                                                    <li>&#10060;&emsp;<span class='text-muted'>Customized Role Mapping</span></li>
+                                                    <li>&#10060;&emsp;<span class='text-muted'>**Multiple IDPs support</span></li>
+                                                    <li>&#10060;&emsp;<span class='text-muted'>Header Based Authentication</span></li>
+                                                    <li>&#10060;&emsp;<span class='text-muted'>Cookie based Authentication</span></li>
+                                                    <li>&#10060;&emsp;<span class='text-muted'>Encrypted Assertion</span></li>
+                                                    <li>&#10060;&emsp;<span class='text-muted'>Custom Certificates</span></li>
+                                                    <li>&#10060;&emsp;<span class='text-muted'>Customized Login & Logout URL</span></li>
+                                                    <li>&#10060;&emsp;<span class='text-muted'>Domain Restriction</span></li>
+                                                </ul>
+                                            </div>
+                                            <!-- Plan Feature List End -->
+                                        </div>
+                                    </div>
+                                    <!-- Premium Plan End -->
+                                    <!-- Enterprise Plan -->
+                                    <div class='col-md-6 moct-align-center'>
+                                        <div class='moc-licensing-plan card-body'>
+                                            <!-- Plan Header -->
+                                            <div class='moc-licensing-plan-header'>
+                                                <div class='moc-licensing-plan-name'>ENTERPRISE</div>
+                                                <div class='moc-licensing-plan-price'><sup>$</sup>649<sup>*</sup></div>
+                                            </div>
+                                            <center><button style='background: linear-gradient(22deg, rgb(112 143 205) 2%, rgb(55 185 212) 92%, rgb(135 156 226) 100%); width: 89%; border:2px solid #0a5d7b; color: white;' class='btn btn-block text-uppercase moc-lp-buy-btn' onclick=upgradeform('asp_net_saml_module_enterprise_plan')>Buy Now</button></center>
+
+                                            <!-- Plan Header End -->
+                                            <!-- Plan Feature List -->
+                                            <div class='moc-licensing-plan-feature-list'>
+                                                <ul style='padding-left: 19px; padding-right: 19px;'>
+                                                    <li>&#9989;&emsp;Unlimited Authentications Support</li>
+                                                    <li>&#9989;&emsp;Basic Attribute Mapping(Username)</li>
+                                                    <li>&#9989;&emsp;Custom Redirect URL After Login</li>
+                                                    <li>&#9989;&emsp;Step by Step Guides<br></li>
+                                                    <li>&#9989;&emsp;Login link</li>
+                                                    <li>&#9989;&emsp;Protect Complete Site</li>
+                                                    <li>&#9989;&emsp;Advanced Attribute Mapping<br>&nbsp;&nbsp;&nbsp;(Email,Firstname, Lastname)</li>
+                                                    <li>&#9989;&emsp;SAML Single Logout</li>
+                                                    <li>&#9989;&emsp;Custom Attribute Mapping</li>
+                                                    <li>&#9989;&emsp;Customize SP configuration</li>
+                                                    <li>&#9989;&emsp;Use different Binding type</li>
+                                                    <li>&#9989;&emsp;Custom redirect URL after logout</li>
+                                                    <li>&#9989;&emsp;Basic Role Mapping</li>
+                                                    <li>&#9989;&emsp;Customized Role Mapping</li>
+                                                    <li>&#9989;&emsp;**Multiple IDPs support</li>
+                                                    <li>&#9989;&emsp;Header Based Authentication</li>
+                                                    <li>&#9989;&emsp;Cookie based Authentication</li>
+                                                    <li>&#9989;&emsp;Encrypted Assertion</li>
+                                                    <li>&#9989;&emsp;Custom Certificates</li>
+                                                    <li>&#9989;&emsp;Customized Login & Logout URL</li>
+                                                    <li>&#9989;&emsp;Domain Restriction</li>
+                                                </ul>
+                                            </div>
+                                            <!-- Plan Feature List End -->
+                                        </div>
+                                    </div>
+                                    <!-- Enterprise Plan End -->
+                                    <!-- Licensing Plans End -->
+
+
+                                </div>
+                                <div class='moc-licensing-notice'>
+                                    <h5>** Multiple IdP Support -</h5>
+                                    <p>There is an additional cost for the number of Identity Providers you want to integrate additionally, by default only single IdP is supported</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div id='hts_tab' style='margin-top: -3em;'>
+                            <h3 style='color: #085966; margin-top: 1.75em;'>How to Setup:</h3>
+                            <div id='hts_tab_content'>
+                                <p>You can follow below mentioned steps to configure SSO using our middleware </p>
+                                <div id='hts_steps' style='font-weight: normal;'>
+                                    <p style='font-size: 17px;color: #237688;'>
+                                        <b>Step 1: Share SP SAML metadata with partner provider.</b><br />
+                                        <ol>
+                                            <p>After installation of the plugin, we need to setup the trust between your ASP.NET application and your desired identity or partner provider. SAML metadata is shared with partner providers so they can update their inbuilt configuration to support Single Sign-On. </p>
+                                            <p><b>Note:</b> <i>If you already have IdP Metadata you can skip to step 2</i></p>
+                                            <p>Click on the <b>Service Provider Settings</b>, inside the plugin dashboard to get SP Metadata </p>
+                                            <img src='https://plugins.miniorange.com/wp-content/uploads/2022/12/asp-net-saml-sp-settings-metadata.webp' class='hts-image' style='width: 57%;' />
+
+                                            <p>There are two ways detailed below with which you can get the SAML SP metadata to configure onto your identity provider end.</p>
+                                            <li style='margin-left: 1em;'>
+                                                <b>Using SAML metadata URL or metadata file:</b>
+                                                <ul>
+                                                    <li>In the <b>Service Provider Settings tab</b>, you can find the metadata URL as well as the option to download the SAML metadata.</li>
+                                                    <li>Copy metadata URL or download the metadata file to configure the same on your identity provider end.</li>
+                                                    <img src='https://plugins.miniorange.com/wp-content/uploads/2022/12/asp-net-saml-download-sp-metadata.webp' class='hts-image' style='width:100%' />
+                                                </ul>
+                                            </li>
+                                            <li style='margin-left: 1em; margin-top: 6px;'>
+                                                <b>Uploading metadata manually:</b>
+                                                <ul>
+                                                    <li>From the <b>Service Provider Settings tab</b>, you can manually copy the service provider metadata like SP Entity ID, ACS URL, Single Logout URL and share it with your identity provider for configuration.</li>
+                                                    <img src='https://plugins.miniorange.com/wp-content/uploads/2021/09/manualmetadata.webp' class='hts-image' style='width:100%' />
+                                                </ul>
+                                            </li>
+
+
+                                        </ol>
+                                    </p>
+                                    <div style='text-align: right;' id='more_btn'><button class='see_more_class' id='see_more' onclick='see_more();'>see more <i class='bx bx-chevrons-right'></i></button></div>
+                                    <div id='see_more_content'>
+                                        <p style='font-size: 17px;color: #237688;'>
+                                            <b>Step 2: Configure your service provider (SSO Middleware)</b><br />
+                                            <ol>
+                                                <p><b>Step 2.1: Select the Identity Provider</b></p>
+                                                <li style='margin-left: 1em;'>For configuring application in the middleware, click on the <b><i>Add new IdP</i></b> button in the <b>Identity Provider Settings tab</b></li>
+                                                <img src='https://plugins.miniorange.com/wp-content/uploads/2024/02/asp-net-core-add-new-idp.webp' class='hts-image' />
+                                                <li style='margin-left: 1em;'>Select your identity provider from the list shown.</li>
+                                                <img src='https://plugins.miniorange.com/wp-content/uploads/2024/02/asp-net-core-select-idp.webp' class='hts-image' />
+                                            </ol>
+
+                                            <ol>
+                                                <p><b>Step 2.2: Configure the Identity Provider settings</b></p>
+                                                <p>There are two ways detailed below with which you can configure your SAML identity provider metadata in the middleware.</p>
+                                                <li style='margin-left: 1em;'>
+                                                    <b>Upload metadata using the Upload IDP Metadata button:</b>
+                                                    <ul>
+                                                        <li>If your identity provider has provided you with the metadata URL or metadata file (.xml format only), then you can simply configure the identity provider metadata in the middleware using the <b>Upload IDP Metadata</b> option.</li>
+                                                        <li>You may refer to screenshot below:
+                                                    </ul>
+                                                </li>
+                                                <img src='https://plugins.miniorange.com/wp-content/uploads/2021/09/uploadmetadata.webp' style='width: 47%; margin-left: 4em' class='hts-image' />
+                                                <li style='margin-left: 1em;'>
+                                                    <b>Configure the identity provider metadata manually:</b>
+                                                    <ul>
+                                                        <li>After configuring your <b>Identity Provider</b>, it will provide you with <b>IDP Entity ID, IDP Single Sign On URL</b> and <b>SAML X509 Certificate</b> fields respectively.</li>
+                                                        <li>Click <b>Save</b> to save your IDP details.</li>
+                                                    </ul>
+                                                </li>
+                                                <img src='https://plugins.miniorange.com/wp-content/uploads/2024/02/asp-net-core-configure-idp-manually.webp' class='hts-image' style='width: 59%; margin-left: 4em;' />
+
+                                            </ol>
+                                        </p>
+
+
+                                        <p>
+                                            <b style='font-size: 17px;color: #237688;'>Step 3: Testing the configuration</b><br /><br />
+                                            After completing the configuration, you can test the configuration by clicking on the <b>Test Configuration</b> option from the <b>Action dropdown</b> of the configured application table in plugin dashboard
+                                            <ol>
+                                                <li>Click on the <b>Test Configuration option</b> from the <b>Action</b> dropdown to test whether the SAML Configuration you’ve done is correct.</li>
+
+                                                <img src='https://plugins.miniorange.com/wp-content/uploads/2022/12/asp-net-saml-hover-on-test-configuration.webp' class='hts-image' />
+                                                <li>The screenshot below shows a successful result.</li>
+                                                <img src='https://plugins.miniorange.com/wp-content/uploads/2022/04/test-click-on-sso-integration.webp' class='hts-image' style='width: 51%;' />
+                                            </ol>
+                                        </p>
+
+
+                                        <p style='margin-bottom: 0;'>
+                                            <b style='font-size: 17px;color: #237688;'>Step 4: Integration Code</b><br /><br />
+                                            <ol>
+                                                <li> After the successful authentication on the IdP end, the middleware will store the user data like Username, Email, Firstname or Lastname etc. in User claims.</li>
+                                                <li> The data store can be selected based on your existing authentication mechanism for your application.</li>
+
+                                                @{
+                                                    string redirecttoint = "";
+                                                    string appname = "";
+                                                    if (Model.Apps_Dict.Count == 0)
+                                                    {
+                                                        redirecttoint = Model.Baseurl + "/?ssoaction=config&tab=appslist";
+                                                    }
+                                                    else
+                                                    {
+                                                        if (Model.Apps_Dict != null)
+                                                        {
+                                                            appname = Model.Apps_Dict.Keys.First();
+                                                            redirecttoint = Model.Baseurl + "/?ssoaction=config&tab=integrationcode&appid=" + appname;
+                                                        }
+                                                        else
+                                                        {
+                                                            redirecttoint = Model.Baseurl + "/?ssoaction=config&tab=appslist";
+                                                        }
+
+                                                    }
+                                                }
+
+                                                <li>To access or fetch these user details throughout the application you can use the integration code. You’ll be able to find more detailed steps on the same in the <b><a href='@redirecttoint'>Integration Steps tab</a></b></li>
+                                                <li><img src='https://plugins.miniorange.com/wp-content/uploads/2024/02/asp-net-core-integration-code.webp' class='hts-image' /></li>
+                                            </ol>
+                                        </p>
+
+                                        <p>
+                                            <b style='font-size: 17px;color: #237688;'>Step 6: Get the link for Single Sign-On (SSO) in your application for </b><br /><br />
+                                            When all the necessary configuration is completed, you can perform SSO through the SSO Link
+                                            <ol>
+                                                <li>You can find the <b>SSO Link</b> in the <b>Action dropdown</b> in <b>Application List tab</b> of the middleware. </li>
+                                                <img src='https://plugins.miniorange.com/wp-content/uploads/2022/12/asp-net-saml-copy-sso-link.webp' class='hts-image' />
+                                            </ol>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class='tile col-lg-6' style='width:100%; margin-top:-4%;'>
+                        <div class='row' style='padding-inline: 1em;'>
+                            <h3 style='color: #085966;'>Contact us:</h3>
+                            <form id='form1' action='@Model.Baseurl?ssoaction=config&tab=supportApp' method='post'>
+                                @Html.AntiForgeryToken()
+                                <div class='form-group' style='margin-top: 5px;'>
+                                    <input type='hidden' name='option' value='support'>
+                                    <p>Need any help? Just send us a query so we can help you.</p>
+                                    <label for='cust_email'>Email</label>
+                                    <input type='email' required class='form-inline' style='border-left: 4px solid red; color: black;background-color:white;' id='cust_email' name='mo_admin_email' placeholder='Enter your Email' />
+                                    <label for='cust_name'>Name</label>
+                                    <input type='text' required class='form-inline' style='border-left: 4px solid red; color: black;width:100%;' id='cust_name' name='mo_admin_name' placeholder='Enter your name'>
+                                    <label for='cust_query'>Query :</label><br>
+                                    <textarea required style='width:100%;' class='form-inline' name='mo_admin_query' rows='5' cols='50' placeholder='Write your query here'></textarea>
+                                </div>
+                                <input type='submit' value='Submit' class='btn btn-primary' onclick='popup_success()'>  <br><br>
+                                <script>function popup_success() { alert('We have received your query, our support executive will reach out to you soon.') }</script>
+                                <p>If you want custom features in the plugin, just drop an email at <a href='mailto:aspnetsupport@xecurify.com'>aspnetsupport@xecurify.com</a>.</p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </main>
+    <script>
+        function redirection_on_option_active(app, isMultitenant) {
+            console.log("function called!");
+            var selected_action = document.getElementById("action_selected_" + app).value;
+            var base_url = document.getElementById("base_url_input_field").value;
+            console.log("Selected Action>>" + selected_action);
+            console.log("base url" + base_url);
+            switch (selected_action) {
+                case "1":
+                    var location = base_url + "?ssoaction=config&tab=appconfig&appid=" + app + "&isMultitenant=" + isMultitenant
+                    window.location.href = location;
+                    console.log(location);
+                    break;
+                case "3":
+                    var location = base_url + "?ssoaction=config&option=testconfig&appid=" + app + "&isMultitenant=" + isMultitenant
+                    console.log(location);
+                    var myWindow = window.open(location, "", "width = 670,height = 530");
+                    break;
+                case "4":
+                    var copyText = document.getElementById("ssolink_" + app);
+                    copyText.select();
+                    console.log(copyText.value);
+                    copyToClipboard(copyText.value);
+                    var redirection_confiramation = confirm("SSO Link copied to clipboard:" + copyText.value + ". You can now test SSO login");
+                    if (redirection_confiramation) {
+                        window.location.href = base_url + "?ssoaction=config";
+                    }
+                    else {
+                        window.location.href = base_url + "?ssoaction=config";
+                        console.log(location);
+                    }
+                    break;
+                case "5":
+                    var delete_confiramation = confirm("Do you want to delete this application?");
+                    if (delete_confiramation) {
+                        var location = base_url + "?ssoaction=config&action=delete&appid=" + app + "&isMultitenant=" + isMultitenant;
+                        window.location.href = location;
+                        console.log(location);
+                    }
+
+                    break;
+                default:
+                    window.location.href = window.location.href;
+                    console.log(location);
+
+            }
+
+        }
+
+        function copyToClipboard(text) {
+            var dummy = document.createElement("textarea");
+            document.body.appendChild(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+        }
+
+
+
+        
+    </script>
+</body>
+
+</html>

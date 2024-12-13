@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    string SLOUrl = $"{HttpContext.Current.Request.Path}?ssoaction=logout";
+    string username = string.Empty;
+    if (ViewData["username"] != null)
+    {
+        username = ViewData["username"].ToString();
+    }
+}
+
+<main>
+    <section>
+        <p>Hello, @username | <a style="text-decoration-line: none;" href="@(SLOUrl)"><b>Logout</b></a></p>
+        <p>Reach out to us at <a href="mailto:aspnetsupport@xecurify.com" target="_blank">aspnetsupport@xecurify.com</a> for any questions or support.</p>
+        <p>Learn more about <a href="https://plugins.miniorange.com/asp-net" target="_blank">miniOrange ASP.NET solutions</a>.</p>
+    </section>
+
+</main>

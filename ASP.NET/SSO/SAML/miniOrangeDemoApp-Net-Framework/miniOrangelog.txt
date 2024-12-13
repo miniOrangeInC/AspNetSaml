@@ -1,0 +1,308 @@
+
+Log Entry : 17:10:34 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:10:41 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:10:50 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:10:50 12 December 2024
+  :inside the get customer key
+-------------------------------
+
+Log Entry : 17:10:53 12 December 2024
+  :The Registeration Response is: {"message":"CustomerAlreadyExists"}
+-------------------------------
+
+Log Entry : 17:11:35 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:11:36 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:11:44 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:11:44 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:11:46 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:11:51 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:11:52 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:12:43 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:13:21 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:13:23 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:13:25 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:13:25 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:13:28 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:13:30 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:13:39 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:13:40 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:13:41 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:13:43 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:13:56 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:13:56 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:13:56 12 December 2024
+  :Got the value =  for the app = azure-ad Successfully
+-------------------------------
+
+Log Entry : 17:13:56 12 December 2024
+  :Got the value = true for the app = azure-ad Successfully
+-------------------------------
+
+Log Entry : 17:13:58 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:13:59 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:14:00 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:14:01 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:14:02 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:14:03 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:14:07 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:14:08 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:14:08 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:14:08 12 December 2024
+  :Got the value = https://localhost:44389/ for the app = azure-ad Successfully
+-------------------------------
+
+Log Entry : 17:14:09 12 December 2024
+  :Got the value = true for the app = azure-ad Successfully
+-------------------------------
+
+Log Entry : 17:14:11 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:14:11 12 December 2024
+  :Got the value = https://localhost:44389/ for the app = azure-ad Successfully
+-------------------------------
+
+Log Entry : 17:14:12 12 December 2024
+  :Got the value = true for the app = azure-ad Successfully
+-------------------------------
+
+Log Entry : 17:14:17 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:14:17 12 December 2024
+  :Initiating SSO with app: azure-ad
+-------------------------------
+
+Log Entry : 17:14:18 12 December 2024
+  :Relay State: https://localhost:44389/Login/Login
+-------------------------------
+
+Log Entry : 17:14:18 12 December 2024
+  :Creating http-redirect request
+-------------------------------
+
+Log Entry : 17:14:18 12 December 2024
+  :SP Issuer: https://localhost:44389/
+-------------------------------
+
+Log Entry : 17:14:18 12 December 2024
+  :ACS Url: https://localhost:44389/?ssoaction=acs
+-------------------------------
+
+Log Entry : 17:14:18 12 December 2024
+  :SSO Url: https://login.microsoftonline.com/07ad8cca-ce19-449f-81d8-08677065d1f0/saml2
+-------------------------------
+
+Log Entry : 17:14:18 12 December 2024
+  :Returning login request xml
+-------------------------------
+
+Log Entry : 17:14:18 12 December 2024
+  :SAML Request<samlp:AuthnRequest ID="_cc222b13-bfa8-4569-8af7-b17f3e86f061" Version="2.0" IssueInstant="2024-12-12T11:44:18Z" ProtocolBinding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" AssertionConsumerServiceURL="https://localhost:44389/?ssoaction=acs" Destination="https://login.microsoftonline.com/07ad8cca-ce19-449f-81d8-08677065d1f0/saml2" xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"><saml:Issuer xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion">https://localhost:44389/</saml:Issuer><samlp:NameIDPolicy AllowCreate="true" Format="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified" /></samlp:AuthnRequest>
+-------------------------------
+
+Log Entry : 17:14:18 12 December 2024
+  :SSO Url: https://login.microsoftonline.com/07ad8cca-ce19-449f-81d8-08677065d1f0/saml2
+-------------------------------
+
+Log Entry : 17:14:18 12 December 2024
+  :Redirecting to request: https://login.microsoftonline.com/07ad8cca-ce19-449f-81d8-08677065d1f0/saml2?SAMLRequest=fVJda9swFP0rQu%2BKLce1FRGnZA1jgXYLTdaHvhRFvmoEsuTpyt327%2Bc4G2QPLdynw%2FngHO4SVed6uR7SyT%2FCjwEwke2moS9aF0Vx5HN2NEqw8qZaMKFMzY68NnMQlckrTskTRLTBN7SY5ZRsEQfYekzKpxHKi5LxYrwD57IsJRfPlOxiSEEH98n61vrXhg7Ry6DQovSqA5RJy%2F364V6OjvJ4IaH8cjjs2O7b%2FkDJGhFiGkPvgsehg7iH%2BGY1fH%2B8b%2BgppR5llrmglTsFTGPuXCyyW8Sg9FnVKI2UbMae1qsJuBK9Wj%2FrrI4Bg0nBO%2BthpkOX5bVqhdaKaeALVpYLwwRvBctFVdd5ddNyk2fnJQtKfnXOo5xm%2Fbhc%2F3cJulqe2XJaL17pP5arfzvQ1Xutl9mV8SWll19Hp%2B1mF5zVv8naufDzLoJK0NAUB6Dkc4idSu9n8xmfENsyM1Hl4LEHbY2FlpJsdUn9%2F6dWfwA%3D&RelayState=https%3A%2F%2Flocalhost%3A44389%2FLogin%2FLogin
+-------------------------------
+
+Log Entry : 17:14:18 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:14:18 12 December 2024
+  :Received SAML Response : PHNhbWxwOlJlc3BvbnNlIElEPSJfNTYyODMwODItYWIzMS00ODMzLWFlNDYtYWE1Y2FjODg0NDk5IiBWZXJzaW9uPSIyLjAiIElzc3VlSW5zdGFudD0iMjAyNC0xMi0xMlQxMTo0NDoxOS4yMDNaIiBEZXN0aW5hdGlvbj0iaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzODkvP3Nzb2FjdGlvbj1hY3MiIEluUmVzcG9uc2VUbz0iX2NjMjIyYjEzLWJmYTgtNDU2OS04YWY3LWIxN2YzZTg2ZjA2MSIgeG1sbnM6c2FtbHA9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpwcm90b2NvbCI+PElzc3VlciB4bWxucz0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmFzc2VydGlvbiI+aHR0cHM6Ly9zdHMud2luZG93cy5uZXQvMDdhZDhjY2EtY2UxOS00NDlmLTgxZDgtMDg2NzcwNjVkMWYwLzwvSXNzdWVyPjxzYW1scDpTdGF0dXM+PHNhbWxwOlN0YXR1c0NvZGUgVmFsdWU9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpzdGF0dXM6U3VjY2VzcyIvPjwvc2FtbHA6U3RhdHVzPjxBc3NlcnRpb24gSUQ9Il8wOTEzYTcxMy1lZDJlLTRlNmQtYWFmOC01Nzg5ZDVkMTkxMDAiIElzc3VlSW5zdGFudD0iMjAyNC0xMi0xMlQxMTo0NDoxOS4yMDBaIiBWZXJzaW9uPSIyLjAiIHhtbG5zPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIj48SXNzdWVyPmh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzA3YWQ4Y2NhLWNlMTktNDQ5Zi04MWQ4LTA4Njc3MDY1ZDFmMC88L0lzc3Vlcj48U2lnbmF0dXJlIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwLzA5L3htbGRzaWcjIj48U2lnbmVkSW5mbz48Q2Fub25pY2FsaXphdGlvbk1ldGhvZCBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvMTAveG1sLWV4Yy1jMTRuIyIvPjxTaWduYXR1cmVNZXRob2QgQWxnb3JpdGhtPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNyc2Etc2hhMjU2Ii8+PFJlZmVyZW5jZSBVUkk9IiNfMDkxM2E3MTMtZWQyZS00ZTZkLWFhZjgtNTc4OWQ1ZDE5MTAwIj48VHJhbnNmb3Jtcz48VHJhbnNmb3JtIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnI2VudmVsb3BlZC1zaWduYXR1cmUiLz48VHJhbnNmb3JtIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS8xMC94bWwtZXhjLWMxNG4jIi8+PC9UcmFuc2Zvcm1zPjxEaWdlc3RNZXRob2QgQWxnb3JpdGhtPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGVuYyNzaGEyNTYiLz48RGlnZXN0VmFsdWU+dXh1RGJCLy9PTHJ3WG9QRzA0eHBPdENBeXpUMFNtTzlqYk8vTjA5cTN0RT08L0RpZ2VzdFZhbHVlPjwvUmVmZXJlbmNlPjwvU2lnbmVkSW5mbz48U2lnbmF0dXJlVmFsdWU+SGg2WWl3end1L2U0SjF3cXc0OXhLVTQzRFJnV3FKNlpJUWQrSm01MzNtWkNpMTc2QmJDQ1Q2YWpTcSszcWtNRUJQNHI4cGo3NlJad0RvZ2hJZHN2MmpTd0NIeERXWjdlR0NRN2lRckdQNjJvQnhBc0QyUXdzRnR4N3BJV01mQTFvdmhuZ1p2Q0k5aDh6OEVrNEZ2NGY0VXlqWnl2ZStTdjV1NzJ0ODZZOFhWYmw4aGlrUGhkZmlIS1VOTUZqMDJLNGFkZ1lEdWQrc0pUNXhJdkJQQnNWZUJocTFwNCtsVlc5Z2t1RTkyL2daQ0JyMlVFbE1uWGZtNHJIeUFpdC9GT1dkRGIzRi9yZFZSVS9mYitVajdXUThzS2dtUlgrQ0dXSlJXSE42YW84UnQ1cUJ3ODVhZ2dyZ2JMajVaNk9GZHY0VW9IZHFhbFVHb1BYQU1qdDhDLzRBPT08L1NpZ25hdHVyZVZhbHVlPjxLZXlJbmZvPjxYNTA5RGF0YT48WDUwOUNlcnRpZmljYXRlPk1JSUM4RENDQWRpZ0F3SUJBZ0lRTWw5a1UzOXZqcFZCVzlPdjNITFhzekFOQmdrcWhraUc5dzBCQVFzRkFEQTBNVEl3TUFZRFZRUURFeWxOYVdOeWIzTnZablFnUVhwMWNtVWdSbVZrWlhKaGRHVmtJRk5UVHlCRFpYSjBhV1pwWTJGMFpUQWVGdzB5TkRFeE1qVXhNakExTlRkYUZ3MHlOekV4TWpVeE1qQTFOVGRhTURReE1qQXdCZ05WQkFNVEtVMXBZM0p2YzI5bWRDQkJlblZ5WlNCR1pXUmxjbUYwWldRZ1UxTlBJRU5sY25ScFptbGpZWFJsTUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUE0a0c3U0cxbWk3YXJtWjZteGJYOUlRajJySndxbFZKMG15VWVRSXp2dXVuTDFYUHRIWUFRMmgrRTlHNUNpQjltR3hTVlF2VDBINkpJYW5mMXh3My8zQS9uQkc4d1RqNEdIZUxiR2xndGUzcGJ1cFFSUCsxUmFYdnVSL1laLzRzQmR6cUk1aXdmSms1MWp0ZDJsSm1PMUpMRGtZVGV1bi84VFgxVjlTdkRkQUg1WDFTanMrTUtHK1czZ3QvNDlRNGdCU2dvbHhWVzF5dEtDd01ibUxNMmt2elo1YkhXOGp2cDVpUy9ROXN1MVVsMXFXOWREVXdaejBpRmlTVld6RFV5anBrQnZaSGhOZmU0azdwcjhtL0VKbzZOTFZ1ZHI2eDIwU3U3UmZ1b2RaR0xTYm5sRnk3VFZXekhXTzhkNlF0SVNMdEM2UEp1TGFRQ3ZUZXc1c1FRTlFJREFRQUJNQTBHQ1NxR1NJYjNEUUVCQ3dVQUE0SUJBUUFaS0JESW13R3IvOEVVOGgydlpkZXA2Tkdsd0x4L2hyeExqejFvYy9Ka2NCczBuYjREOEwwL1FWSXJFN1oza0hHbFhFVWdhK2dyRWl0ZzRld05NMFRFT3V0MmpraWJ4enVFMFZsTmZ6ZHB5VEF1ZEVSWjltUkNqRG42R1RpRnhMdzZtRDc1ci91aDkxcFo5dkNUS3ZsNVZneVE3L3VZRUVncm16cGhtWklKT1E1TG0vcEJLSVhvN0wzdzk3Tm13K1JRNFFaVVVzSENIanFLSy9vVk8zQkpNZmFKOXdZNjI5SGJGZjlWclUvanF4M1dzSlg5Lzl3U1lvZGVDb0lPeTVWVWwvMVJTZVV4RFcwOC9WMFZEa05sYkNOT1ZaWjRFbjQvVHc3KzNuS2hXM09QZjVFL2dCZ2QrTVRuRlY0WlRyM2p2M21vV2F5OGMzYzljOE11MUs5MzwvWDUwOUNlcnRpZmljYXRlPjwvWDUwOURhdGE+PC9LZXlJbmZvPjwvU2lnbmF0dXJlPjxTdWJqZWN0PjxOYW1lSUQgRm9ybWF0PSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoxLjE6bmFtZWlkLWZvcm1hdDplbWFpbEFkZHJlc3MiPmF2aW5hc2gubmFpa25hd3JlQG1veGVjdXJpZnkub25taWNyb3NvZnQuY29tPC9OYW1lSUQ+PFN1YmplY3RDb25maXJtYXRpb24gTWV0aG9kPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6Y206YmVhcmVyIj48U3ViamVjdENvbmZpcm1hdGlvbkRhdGEgSW5SZXNwb25zZVRvPSJfY2MyMjJiMTMtYmZhOC00NTY5LThhZjctYjE3ZjNlODZmMDYxIiBOb3RPbk9yQWZ0ZXI9IjIwMjQtMTItMTJUMTI6NDQ6MTkuMTExWiIgUmVjaXBpZW50PSJodHRwczovL2xvY2FsaG9zdDo0NDM4OS8/c3NvYWN0aW9uPWFjcyIvPjwvU3ViamVjdENvbmZpcm1hdGlvbj48L1N1YmplY3Q+PENvbmRpdGlvbnMgTm90QmVmb3JlPSIyMDI0LTEyLTEyVDExOjM5OjE5LjExMVoiIE5vdE9uT3JBZnRlcj0iMjAyNC0xMi0xMlQxMjo0NDoxOS4xMTFaIj48QXVkaWVuY2VSZXN0cmljdGlvbj48QXVkaWVuY2U+aHR0cHM6Ly9sb2NhbGhvc3Q6NDQzODkvPC9BdWRpZW5jZT48L0F1ZGllbmNlUmVzdHJpY3Rpb24+PC9Db25kaXRpb25zPjxBdHRyaWJ1dGVTdGF0ZW1lbnQ+PEF0dHJpYnV0ZSBOYW1lPSJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL2lkZW50aXR5L2NsYWltcy90ZW5hbnRpZCI+PEF0dHJpYnV0ZVZhbHVlPjA3YWQ4Y2NhLWNlMTktNDQ5Zi04MWQ4LTA4Njc3MDY1ZDFmMDwvQXR0cmlidXRlVmFsdWU+PC9BdHRyaWJ1dGU+PEF0dHJpYnV0ZSBOYW1lPSJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL2lkZW50aXR5L2NsYWltcy9vYmplY3RpZGVudGlmaWVyIj48QXR0cmlidXRlVmFsdWU+NzE4YzIxMzUtMDI3MC00YmNmLTg1NDMtOTE5MWQ3MTMzNDE5PC9BdHRyaWJ1dGVWYWx1ZT48L0F0dHJpYnV0ZT48QXR0cmlidXRlIE5hbWU9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vaWRlbnRpdHkvY2xhaW1zL2Rpc3BsYXluYW1lIj48QXR0cmlidXRlVmFsdWU+QXZpbmFzaCBOYWlrbndhcmU8L0F0dHJpYnV0ZVZhbHVlPjwvQXR0cmlidXRlPjxBdHRyaWJ1dGUgTmFtZT0iaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS9pZGVudGl0eS9jbGFpbXMvaWRlbnRpdHlwcm92aWRlciI+PEF0dHJpYnV0ZVZhbHVlPmh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzA3YWQ4Y2NhLWNlMTktNDQ5Zi04MWQ4LTA4Njc3MDY1ZDFmMC88L0F0dHJpYnV0ZVZhbHVlPjwvQXR0cmlidXRlPjxBdHRyaWJ1dGUgTmFtZT0iaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS9jbGFpbXMvYXV0aG5tZXRob2RzcmVmZXJlbmNlcyI+PEF0dHJpYnV0ZVZhbHVlPmh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9hdXRoZW50aWNhdGlvbm1ldGhvZC9wYXNzd29yZDwvQXR0cmlidXRlVmFsdWU+PEF0dHJpYnV0ZVZhbHVlPmh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vY2xhaW1zL211bHRpcGxlYXV0aG48L0F0dHJpYnV0ZVZhbHVlPjwvQXR0cmlidXRlPjxBdHRyaWJ1dGUgTmFtZT0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIj48QXR0cmlidXRlVmFsdWU+YXZpbmFzaC5uYWlrbmF3cmVAbW94ZWN1cmlmeS5vbm1pY3Jvc29mdC5jb208L0F0dHJpYnV0ZVZhbHVlPjwvQXR0cmlidXRlPjxBdHRyaWJ1dGUgTmFtZT0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI+PEF0dHJpYnV0ZVZhbHVlPmF2aW5hc2gubmFpa25hd3JlQG1veGVjdXJpZnkub25taWNyb3NvZnQuY29tPC9BdHRyaWJ1dGVWYWx1ZT48L0F0dHJpYnV0ZT48L0F0dHJpYnV0ZVN0YXRlbWVudD48QXV0aG5TdGF0ZW1lbnQgQXV0aG5JbnN0YW50PSIyMDI0LTExLTI2VDA4OjIwOjM1Ljg1OFoiIFNlc3Npb25JbmRleD0iXzA5MTNhNzEzLWVkMmUtNGU2ZC1hYWY4LTU3ODlkNWQxOTEwMCI+PEF1dGhuQ29udGV4dD48QXV0aG5Db250ZXh0Q2xhc3NSZWY+dXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmFjOmNsYXNzZXM6UGFzc3dvcmQ8L0F1dGhuQ29udGV4dENsYXNzUmVmPjwvQXV0aG5Db250ZXh0PjwvQXV0aG5TdGF0ZW1lbnQ+PC9Bc3NlcnRpb24+PC9zYW1scDpSZXNwb25zZT4=
+-------------------------------
+
+Log Entry : 17:14:18 12 December 2024
+  :SAML Response: PHNhbWxwOlJlc3BvbnNlIElEPSJfNTYyODMwODItYWIzMS00ODMzLWFlNDYtYWE1Y2FjODg0NDk5IiBWZXJzaW9uPSIyLjAiIElzc3VlSW5zdGFudD0iMjAyNC0xMi0xMlQxMTo0NDoxOS4yMDNaIiBEZXN0aW5hdGlvbj0iaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzODkvP3Nzb2FjdGlvbj1hY3MiIEluUmVzcG9uc2VUbz0iX2NjMjIyYjEzLWJmYTgtNDU2OS04YWY3LWIxN2YzZTg2ZjA2MSIgeG1sbnM6c2FtbHA9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpwcm90b2NvbCI+PElzc3VlciB4bWxucz0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmFzc2VydGlvbiI+aHR0cHM6Ly9zdHMud2luZG93cy5uZXQvMDdhZDhjY2EtY2UxOS00NDlmLTgxZDgtMDg2NzcwNjVkMWYwLzwvSXNzdWVyPjxzYW1scDpTdGF0dXM+PHNhbWxwOlN0YXR1c0NvZGUgVmFsdWU9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpzdGF0dXM6U3VjY2VzcyIvPjwvc2FtbHA6U3RhdHVzPjxBc3NlcnRpb24gSUQ9Il8wOTEzYTcxMy1lZDJlLTRlNmQtYWFmOC01Nzg5ZDVkMTkxMDAiIElzc3VlSW5zdGFudD0iMjAyNC0xMi0xMlQxMTo0NDoxOS4yMDBaIiBWZXJzaW9uPSIyLjAiIHhtbG5zPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIj48SXNzdWVyPmh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzA3YWQ4Y2NhLWNlMTktNDQ5Zi04MWQ4LTA4Njc3MDY1ZDFmMC88L0lzc3Vlcj48U2lnbmF0dXJlIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwLzA5L3htbGRzaWcjIj48U2lnbmVkSW5mbz48Q2Fub25pY2FsaXphdGlvbk1ldGhvZCBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvMTAveG1sLWV4Yy1jMTRuIyIvPjxTaWduYXR1cmVNZXRob2QgQWxnb3JpdGhtPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNyc2Etc2hhMjU2Ii8+PFJlZmVyZW5jZSBVUkk9IiNfMDkxM2E3MTMtZWQyZS00ZTZkLWFhZjgtNTc4OWQ1ZDE5MTAwIj48VHJhbnNmb3Jtcz48VHJhbnNmb3JtIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnI2VudmVsb3BlZC1zaWduYXR1cmUiLz48VHJhbnNmb3JtIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS8xMC94bWwtZXhjLWMxNG4jIi8+PC9UcmFuc2Zvcm1zPjxEaWdlc3RNZXRob2QgQWxnb3JpdGhtPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGVuYyNzaGEyNTYiLz48RGlnZXN0VmFsdWU+dXh1RGJCLy9PTHJ3WG9QRzA0eHBPdENBeXpUMFNtTzlqYk8vTjA5cTN0RT08L0RpZ2VzdFZhbHVlPjwvUmVmZXJlbmNlPjwvU2lnbmVkSW5mbz48U2lnbmF0dXJlVmFsdWU+SGg2WWl3end1L2U0SjF3cXc0OXhLVTQzRFJnV3FKNlpJUWQrSm01MzNtWkNpMTc2QmJDQ1Q2YWpTcSszcWtNRUJQNHI4cGo3NlJad0RvZ2hJZHN2MmpTd0NIeERXWjdlR0NRN2lRckdQNjJvQnhBc0QyUXdzRnR4N3BJV01mQTFvdmhuZ1p2Q0k5aDh6OEVrNEZ2NGY0VXlqWnl2ZStTdjV1NzJ0ODZZOFhWYmw4aGlrUGhkZmlIS1VOTUZqMDJLNGFkZ1lEdWQrc0pUNXhJdkJQQnNWZUJocTFwNCtsVlc5Z2t1RTkyL2daQ0JyMlVFbE1uWGZtNHJIeUFpdC9GT1dkRGIzRi9yZFZSVS9mYitVajdXUThzS2dtUlgrQ0dXSlJXSE42YW84UnQ1cUJ3ODVhZ2dyZ2JMajVaNk9GZHY0VW9IZHFhbFVHb1BYQU1qdDhDLzRBPT08L1NpZ25hdHVyZVZhbHVlPjxLZXlJbmZvPjxYNTA5RGF0YT48WDUwOUNlcnRpZmljYXRlPk1JSUM4RENDQWRpZ0F3SUJBZ0lRTWw5a1UzOXZqcFZCVzlPdjNITFhzekFOQmdrcWhraUc5dzBCQVFzRkFEQTBNVEl3TUFZRFZRUURFeWxOYVdOeWIzTnZablFnUVhwMWNtVWdSbVZrWlhKaGRHVmtJRk5UVHlCRFpYSjBhV1pwWTJGMFpUQWVGdzB5TkRFeE1qVXhNakExTlRkYUZ3MHlOekV4TWpVeE1qQTFOVGRhTURReE1qQXdCZ05WQkFNVEtVMXBZM0p2YzI5bWRDQkJlblZ5WlNCR1pXUmxjbUYwWldRZ1UxTlBJRU5sY25ScFptbGpZWFJsTUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUE0a0c3U0cxbWk3YXJtWjZteGJYOUlRajJySndxbFZKMG15VWVRSXp2dXVuTDFYUHRIWUFRMmgrRTlHNUNpQjltR3hTVlF2VDBINkpJYW5mMXh3My8zQS9uQkc4d1RqNEdIZUxiR2xndGUzcGJ1cFFSUCsxUmFYdnVSL1laLzRzQmR6cUk1aXdmSms1MWp0ZDJsSm1PMUpMRGtZVGV1bi84VFgxVjlTdkRkQUg1WDFTanMrTUtHK1czZ3QvNDlRNGdCU2dvbHhWVzF5dEtDd01ibUxNMmt2elo1YkhXOGp2cDVpUy9ROXN1MVVsMXFXOWREVXdaejBpRmlTVld6RFV5anBrQnZaSGhOZmU0azdwcjhtL0VKbzZOTFZ1ZHI2eDIwU3U3UmZ1b2RaR0xTYm5sRnk3VFZXekhXTzhkNlF0SVNMdEM2UEp1TGFRQ3ZUZXc1c1FRTlFJREFRQUJNQTBHQ1NxR1NJYjNEUUVCQ3dVQUE0SUJBUUFaS0JESW13R3IvOEVVOGgydlpkZXA2Tkdsd0x4L2hyeExqejFvYy9Ka2NCczBuYjREOEwwL1FWSXJFN1oza0hHbFhFVWdhK2dyRWl0ZzRld05NMFRFT3V0MmpraWJ4enVFMFZsTmZ6ZHB5VEF1ZEVSWjltUkNqRG42R1RpRnhMdzZtRDc1ci91aDkxcFo5dkNUS3ZsNVZneVE3L3VZRUVncm16cGhtWklKT1E1TG0vcEJLSVhvN0wzdzk3Tm13K1JRNFFaVVVzSENIanFLSy9vVk8zQkpNZmFKOXdZNjI5SGJGZjlWclUvanF4M1dzSlg5Lzl3U1lvZGVDb0lPeTVWVWwvMVJTZVV4RFcwOC9WMFZEa05sYkNOT1ZaWjRFbjQvVHc3KzNuS2hXM09QZjVFL2dCZ2QrTVRuRlY0WlRyM2p2M21vV2F5OGMzYzljOE11MUs5MzwvWDUwOUNlcnRpZmljYXRlPjwvWDUwOURhdGE+PC9LZXlJbmZvPjwvU2lnbmF0dXJlPjxTdWJqZWN0PjxOYW1lSUQgRm9ybWF0PSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoxLjE6bmFtZWlkLWZvcm1hdDplbWFpbEFkZHJlc3MiPmF2aW5hc2gubmFpa25hd3JlQG1veGVjdXJpZnkub25taWNyb3NvZnQuY29tPC9OYW1lSUQ+PFN1YmplY3RDb25maXJtYXRpb24gTWV0aG9kPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6Y206YmVhcmVyIj48U3ViamVjdENvbmZpcm1hdGlvbkRhdGEgSW5SZXNwb25zZVRvPSJfY2MyMjJiMTMtYmZhOC00NTY5LThhZjctYjE3ZjNlODZmMDYxIiBOb3RPbk9yQWZ0ZXI9IjIwMjQtMTItMTJUMTI6NDQ6MTkuMTExWiIgUmVjaXBpZW50PSJodHRwczovL2xvY2FsaG9zdDo0NDM4OS8/c3NvYWN0aW9uPWFjcyIvPjwvU3ViamVjdENvbmZpcm1hdGlvbj48L1N1YmplY3Q+PENvbmRpdGlvbnMgTm90QmVmb3JlPSIyMDI0LTEyLTEyVDExOjM5OjE5LjExMVoiIE5vdE9uT3JBZnRlcj0iMjAyNC0xMi0xMlQxMjo0NDoxOS4xMTFaIj48QXVkaWVuY2VSZXN0cmljdGlvbj48QXVkaWVuY2U+aHR0cHM6Ly9sb2NhbGhvc3Q6NDQzODkvPC9BdWRpZW5jZT48L0F1ZGllbmNlUmVzdHJpY3Rpb24+PC9Db25kaXRpb25zPjxBdHRyaWJ1dGVTdGF0ZW1lbnQ+PEF0dHJpYnV0ZSBOYW1lPSJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL2lkZW50aXR5L2NsYWltcy90ZW5hbnRpZCI+PEF0dHJpYnV0ZVZhbHVlPjA3YWQ4Y2NhLWNlMTktNDQ5Zi04MWQ4LTA4Njc3MDY1ZDFmMDwvQXR0cmlidXRlVmFsdWU+PC9BdHRyaWJ1dGU+PEF0dHJpYnV0ZSBOYW1lPSJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL2lkZW50aXR5L2NsYWltcy9vYmplY3RpZGVudGlmaWVyIj48QXR0cmlidXRlVmFsdWU+NzE4YzIxMzUtMDI3MC00YmNmLTg1NDMtOTE5MWQ3MTMzNDE5PC9BdHRyaWJ1dGVWYWx1ZT48L0F0dHJpYnV0ZT48QXR0cmlidXRlIE5hbWU9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vaWRlbnRpdHkvY2xhaW1zL2Rpc3BsYXluYW1lIj48QXR0cmlidXRlVmFsdWU+QXZpbmFzaCBOYWlrbndhcmU8L0F0dHJpYnV0ZVZhbHVlPjwvQXR0cmlidXRlPjxBdHRyaWJ1dGUgTmFtZT0iaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS9pZGVudGl0eS9jbGFpbXMvaWRlbnRpdHlwcm92aWRlciI+PEF0dHJpYnV0ZVZhbHVlPmh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzA3YWQ4Y2NhLWNlMTktNDQ5Zi04MWQ4LTA4Njc3MDY1ZDFmMC88L0F0dHJpYnV0ZVZhbHVlPjwvQXR0cmlidXRlPjxBdHRyaWJ1dGUgTmFtZT0iaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS9jbGFpbXMvYXV0aG5tZXRob2RzcmVmZXJlbmNlcyI+PEF0dHJpYnV0ZVZhbHVlPmh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9hdXRoZW50aWNhdGlvbm1ldGhvZC9wYXNzd29yZDwvQXR0cmlidXRlVmFsdWU+PEF0dHJpYnV0ZVZhbHVlPmh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vY2xhaW1zL211bHRpcGxlYXV0aG48L0F0dHJpYnV0ZVZhbHVlPjwvQXR0cmlidXRlPjxBdHRyaWJ1dGUgTmFtZT0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIj48QXR0cmlidXRlVmFsdWU+YXZpbmFzaC5uYWlrbmF3cmVAbW94ZWN1cmlmeS5vbm1pY3Jvc29mdC5jb208L0F0dHJpYnV0ZVZhbHVlPjwvQXR0cmlidXRlPjxBdHRyaWJ1dGUgTmFtZT0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI+PEF0dHJpYnV0ZVZhbHVlPmF2aW5hc2gubmFpa25hd3JlQG1veGVjdXJpZnkub25taWNyb3NvZnQuY29tPC9BdHRyaWJ1dGVWYWx1ZT48L0F0dHJpYnV0ZT48L0F0dHJpYnV0ZVN0YXRlbWVudD48QXV0aG5TdGF0ZW1lbnQgQXV0aG5JbnN0YW50PSIyMDI0LTExLTI2VDA4OjIwOjM1Ljg1OFoiIFNlc3Npb25JbmRleD0iXzA5MTNhNzEzLWVkMmUtNGU2ZC1hYWY4LTU3ODlkNWQxOTEwMCI+PEF1dGhuQ29udGV4dD48QXV0aG5Db250ZXh0Q2xhc3NSZWY+dXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmFjOmNsYXNzZXM6UGFzc3dvcmQ8L0F1dGhuQ29udGV4dENsYXNzUmVmPjwvQXV0aG5Db250ZXh0PjwvQXV0aG5TdGF0ZW1lbnQ+PC9Bc3NlcnRpb24+PC9zYW1scDpSZXNwb25zZT4=
+-------------------------------
+
+Log Entry : 17:14:18 12 December 2024
+  :Loading saml response...
+-------------------------------
+
+Log Entry : 17:14:18 12 December 2024
+  :Load xml method: POST
+-------------------------------
+
+Log Entry : 17:14:18 12 December 2024
+  :IDP cert: MIIC8DCCAdigAwIBAgIQMl9kU39vjpVBW9Ov3HLXszANBgkqhkiG9w0BAQsFADA0MTIwMAYDVQQDEylNaWNyb3NvZnQgQXp1cmUgRmVkZXJhdGVkIFNTTyBDZXJ0aWZpY2F0ZTAeFw0yNDExMjUxMjA1NTdaFw0yNzExMjUxMjA1NTdaMDQxMjAwBgNVBAMTKU1pY3Jvc29mdCBBenVyZSBGZWRlcmF0ZWQgU1NPIENlcnRpZmljYXRlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4kG7SG1mi7armZ6mxbX9IQj2rJwqlVJ0myUeQIzvuunL1XPtHYAQ2h+E9G5CiB9mGxSVQvT0H6JIanf1xw3/3A/nBG8wTj4GHeLbGlgte3pbupQRP+1RaXvuR/YZ/4sBdzqI5iwfJk51jtd2lJmO1JLDkYTeun/8TX1V9SvDdAH5X1Sjs+MKG+W3gt/49Q4gBSgolxVW1ytKCwMbmLM2kvzZ5bHW8jvp5iS/Q9su1Ul1qW9dDUwZz0iFiSVWzDUyjpkBvZHhNfe4k7pr8m/EJo6NLVudr6x20Su7RfuodZGLSbnlFy7TVWzHWO8d6QtISLtC6PJuLaQCvTew5sQQNQIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQAZKBDImwGr/8EU8h2vZdep6NGlwLx/hrxLjz1oc/JkcBs0nb4D8L0/QVIrE7Z3kHGlXEUga+grEitg4ewNM0TEOut2jkibxzuE0VlNfzdpyTAudERZ9mRCjDn6GTiFxLw6mD75r/uh91pZ9vCTKvl5VgyQ7/uYEEgrmzphmZIJOQ5Lm/pBKIXo7L3w97Nmw+RQ4QZUUsHCHjqKK/oVO3BJMfaJ9wY629HbFf9VrU/jqx3WsJX9/9wSYodeCoIOy5VUl/1RSeUxDW08/V0VDkNlbCNOVZZ4En4/Tw7+3nKhW3OPf5E/gBgd+MTnFV4ZTr3jv3moWay8c3c9c8Mu1K93
+-------------------------------
+
+Log Entry : 17:14:18 12 December 2024
+  :Issuer in SAML Response: https://sts.windows.net/07ad8cca-ce19-449f-81d8-08677065d1f0/
+-------------------------------
+
+Log Entry : 17:14:18 12 December 2024
+  :App Id: azure-ad
+-------------------------------
+
+Log Entry : 17:14:18 12 December 2024
+  :Relay state in SAML response: https://localhost:44389/Login/Login
+-------------------------------
+
+Log Entry : 17:14:18 12 December 2024
+  :Validating SAML response
+-------------------------------
+
+Log Entry : 17:14:18 12 December 2024
+  :Response is valid
+-------------------------------
+
+Log Entry : 17:14:18 12 December 2024
+  :Username: avinash.naiknawre@moxecurify.onmicrosoft.com
+-------------------------------
+
+Log Entry : 17:14:18 12 December 2024
+  :Email: avinash.naiknawre@moxecurify.onmicrosoft.com
+-------------------------------
+
+Log Entry : 17:14:18 12 December 2024
+  :Prefix: 
+-------------------------------
+
+Log Entry : 17:14:18 12 December 2024
+  :User info saved in session
+-------------------------------
+
+Log Entry : 17:14:18 12 December 2024
+  :Redirecting after login to: https://localhost:44389/Login/Login
+-------------------------------
+
+Log Entry : 17:14:21 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:14:21 12 December 2024
+  :Handling logout
+-------------------------------
+
+Log Entry : 17:14:40 12 December 2024
+  :Module invoked
+-------------------------------
+
+Log Entry : 17:14:40 12 December 2024
+  :Handling logout
+-------------------------------
+
+Log Entry : 17:14:40 12 December 2024
+  :Prefix: 
+-------------------------------
+
+Log Entry : 17:14:40 12 December 2024
+  :AppId: azure-ad
+-------------------------------
+
+Log Entry : 17:14:40 12 December 2024
+  :Logout with app: azure-ad
+-------------------------------
+
+Log Entry : 17:14:40 12 December 2024
+  :Removing session
+-------------------------------
+
+Log Entry : 17:14:40 12 December 2024
+  :Redirecting to: https://localhost:44389/
+-------------------------------

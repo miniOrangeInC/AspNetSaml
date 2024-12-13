@@ -1,0 +1,510 @@
+﻿@using miniOrange.saml;
+@using Newtonsoft.Json;
+@using miniOrange.saml.Model;
+@using miniOrange.saml.Utility;
+@model miniOrange.saml.Model.AppConfigModel;
+
+@{
+    Model.PageURL = Model.PageURL.Substring(0, Model.PageURL.IndexOf("?"));
+    Dictionary<string, string> appsdict = null;
+    Dictionary<string, string> newappsdict = null;
+    Dictionary<string, string> idpconfig = null;
+    string key_ser_list = "empty";
+    string newid = "true";
+    if (!String.IsNullOrEmpty(Model.AppList))
+    {
+        appsdict = JsonConvert.DeserializeObject<Dictionary<string, string>>(Model.AppList);
+        List<string> keyList = new List<string>(appsdict.Keys);
+        key_ser_list = JsonConvert.SerializeObject(keyList);
+    }
+    string idp_key = "";
+    if (String.IsNullOrEmpty(Model.NewList))
+    {
+        if (appsdict != null)
+        {
+            foreach (var app in appsdict)
+            {
+                idp_key = "appid";
+                if (app.Key == Model.Appid)
+                {
+                    string appconfig = app.Value;
+                    if (!String.IsNullOrEmpty(appconfig))
+                    {
+                        idpconfig = JsonConvert.DeserializeObject<Dictionary<string, string>>(appconfig);
+                    }
+                }
+            }
+        }
+
+    }
+    else
+    {
+        if (appsdict != null)
+        {
+            if (appsdict.ContainsKey(Model.Appid))
+            {
+                newid = "false";
+            }
+            else
+            {
+                newid = "true";
+            }
+        }
+        else
+        {
+            newid = "true";
+        }
+
+        newappsdict = JsonConvert.DeserializeObject<Dictionary<string, string>>(Model.NewList);
+        if (newappsdict != null)
+        {    
+            idp_key = "newappid";
+            foreach (var app in newappsdict)
+            {
+                if (app.Key == Model.Appid)
+                {
+                    string appconfig = app.Value;
+                    if (!String.IsNullOrEmpty(appconfig))
+                    {
+                        idpconfig = JsonConvert.DeserializeObject<Dictionary<string, string>>(appconfig);
+                    }
+                }
+            }
+        }
+    }
+
+
+    Apps applister = new Apps();
+    Dictionary<string, Dictionary<string, string>> svg_apps_list = applister.getApps();
+
+    if (String.IsNullOrEmpty(Model.isMultiTenant))
+    {
+        Model.isMultiTenant = idpconfig["isMultitenant"];
+    }
+
+    string setupguide = "";
+    string videoguide = "";
+    string idp_setup = Model.Appid;
+
+    if (!String.IsNullOrEmpty(idp_setup))
+    {
+        Dictionary<string, string> newApp = svg_apps_list[idp_setup];
+        setupguide = newApp["setupguide"];
+        videoguide = newApp["videoguide"];
+    }
+
+    if (idpconfig.ContainsKey("http-redirect") && idpconfig.ContainsKey("http-post") && String.IsNullOrEmpty(idpconfig["http-redirect"]) && String.IsNullOrEmpty(idpconfig["http-post"]))
+    {
+        idpconfig["http-redirect"] = "checked";
+    }
+
+    if (idpconfig.ContainsKey("logout-http-redirect") && idpconfig.ContainsKey("logout-http-post") && String.IsNullOrEmpty(idpconfig["logout-http-redirect"]) && String.IsNullOrEmpty(idpconfig["logout-http-post"]))
+    {
+        idpconfig["logout-http-redirect"] = "checked";
+    }
+
+    string attr_json = "";
+
+    if (idpconfig.ContainsKey("custom_attributes"))
+    {
+        attr_json = idpconfig["custom_attributes"];
+    }
+    Dictionary<string, string> custom_attr = null;
+    if (!String.IsNullOrEmpty(attr_json))
+    {
+        custom_attr = JsonConvert.DeserializeObject<Dictionary<string, string>>(attr_json);
+    }
+}
+
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/solid.min.css">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/mo_maincss.css" asp-append-version="true" />
+    <style>
+        #forgot-password-link 
+        {
+            text-align: center;
+            color: #385898;
+            cursor: pointer;
+        }
+</style>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/solid.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/mo_maincss.css" asp-append-version="true" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <link rel="Stylesheet" href="main.css" />
+    <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).on(
+            "click",
+            "[data-role=dynamic-fields] > .form-inline [data-role=remove]",
+            function (e) {
+                e.preventDefault();
+                $(this).closest(".form-inline").remove();
+            }
+        );
+        $(document).on(
+            "click",
+            "[data-role=dynamic-fields] > .form-inline [data-role=add]",
+            function (e) {
+                e.preventDefault();
+                var container = $(this).closest("[data-role=dynamic-fields]");
+                new_field_group = container.children().filter(".form-inline:first-child").clone();
+                new_field_group.find("input").each(function () {
+                    $(this).val("");
+                });
+                container.append(new_field_group);
+            }
+        );
+    </script>
+
+    <script>
+        $("form").on("submit", function (event) {
+            alert("on submit");
+            if ($("#input").val() == 0) {
+                event.preventDefault();
+            }
+            localStorage.fadeInSuccessMessage = "1"
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            if ("fadeInSuccessMessage" in localStorage) {
+                $(".container").fadeIn(1500);
+                delete localStorage.fadeInSuccessMessage;
+            }
+        });
+    </script>
+</head>
+    <body onload="checkIdPName()">
+        <header class="app-header" style="padding-top:1em; width:102%;display:flex;justify-content:space-between">
+           <div style="margin-left: 1em;">
+                    <h3 style="font-weight:normal;"><img src="https://plugins.miniorange.com/wp-content/uploads/2022/05/dnn-miniorange-guide-logo.webp" style="width:6%; margin-right: 0.375em;"></img>miniOrange ASP.NET SAML SSO Middleware v7.0.2</h3>
+                </div>
+                <div class="drpdwn" style="margin-right:1%">
+            <button class="dropbtn">
+                <div style="display:flex;">
+                    <i class="fa fa-user fa-lg" style="margin-top:2%;"></i>
+                    <span style="margin-left: 10px;"> @Model.AdminEmail</span>
+                </div>
+            </button>
+            <div class="drpdwn-content">
+                <a href="@Model.Baseurl?ssoaction=config&option=logout">Logout</a>
+                <a href="@Model.Baseurl?ssoaction=config&tab=account">Account Setup</a>
+            </div>
+            </div>
+        </header>
+            
+        <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+            <aside class="app-sidebar">
+                <div class="app-sidebar__user" style="padding-left: 40px">
+                    <div style="margin-left: 15px;">
+                        <p class="app-sidebar__user-name">ASP.NET SAML</p>
+                        <p class="app-sidebar__user-designation">Middleware v7.0.2</p>
+                    </div>
+                </div>
+            <ul class="app-menu">
+                <li><a class="app-menu__item active" href="@Model.PageURL?ssoaction=config&tab=appconfig&@idp_key=@Model.Appid&multitenant=@Model.isMultiTenant"><i class="app-menu__icon fa fa-cogs"></i><span class="app-menu__label">Identity Provider Settings</span></a></li>
+                <li><a class="app-menu__item" href="@Model.Baseurl?ssoaction=config&tab=attributeandrolemapping&appid=@Model.Appid&multitenant=@Model.isMultiTenant"><i class="app-menu__icon fa fa-user-plus"></i><span class="app-menu__label">Attribute/Role Mapping</span></a></li>
+                <li><a class="app-menu__item" href="@Model.Baseurl?ssoaction=config&tab=loginsetup&appid=@Model.Appid&multitenant=@Model.isMultiTenant"><i class="app-menu__icon fa fa-key"></i><span class="app-menu__label">Login Settings</span></a></li>
+                <li><a class="app-menu__item" href="@Model.Baseurl?ssoaction=config&tab=integrationcode&appid=@Model.Appid&multitenant=@Model.isMultiTenant"><i class="app-menu__icon bx bx-code-alt"></i><span class="app-menu__label">Integration Steps</span></a></li>
+                <li><a class="app-menu__item" href="@Model.Baseurl?ssoaction=config&tab=troubleshoot&appid=@Model.Appid&multitenant=@Model.isMultiTenant"><i class="app-menu__icon bx bxs-grid"></i><span class="app-menu__label">Troubleshooting</span></a></li>
+                <li><a class="app-menu__item" href="https://faq.miniorange.com/kb/asp-net/" target="_blank"><i class="app-menu__icon bx bx-help-circle"></i><span class="app-menu__label">FAQs</span><i class="app-menu__icon bx bx-link-external"></i></a></li>
+            </ul>
+    </aside>
+
+    <main class="app-content">
+        <div class="app-title">
+            <div>
+                <h1><a href="@Model.Baseurl?ssoaction=config&tab=applicationlist"><div data-toggle = "tooltip" title = "Back to Application List" style="margin-right: 15px; font-weight: bolder; color: #0085ba;" class="bx bx-left-arrow-circle"></div></a>Identity Provider Settings</h1>
+                </div>
+                <ul class="app-breadcrumb breadcrumb">
+                    <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+                    <li class="breadcrumb-item"><a href="#">Plugin Settings</a></li>
+                </ul>
+            </div>
+            <div class="container" style="display:none;" id="myAlert">
+                    <div class="alert alert-success alert-dismissable" id="myAlert2">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        Configuration saved successfully....!
+                    </div>
+
+            </div>
+        @if (Model.isMultiTenant == "true")
+        {
+                <div class="tile col-md-12">
+                                <div class="info_tour" role="alert" style="margin-bottom: 0em;border-color: #108395; padding-block: 1em; padding-left: 0; margin-left: 0; background:#dfedfa;">  
+                                    <span style="margin-left: 1em;">Incase of a Multitenant application or AzureB2C/Office365, update the SP-Entity ID from the <strong>Service Provider Settings</strong> tab for that application by following the setup guide.</span>
+                                    </div>
+                </div>
+        }
+        <div class="parent" style="display:flex; gap:1em; margin-right:-1em;">
+            <div class="" style="width: 90%;">
+                <div class="tile">
+                    <div class="row">
+                        <div id="my-modal" class="modal" style="width: 39%; margin-left: 35em; margin-top: 8em;">
+                            <div class="modal-content" style="width:100%;">
+                                <div class="modal-header">
+                                    <h3 style="float:left;">
+                                        Upload IDP Metadata<h3>
+                                            <span class="close" id="close-btn">&times;</span>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="hidden" id="appbaseurl" value="@Model.Baseurl">
+                                    <label style="font-size: 1.19em;"> IdP Name: </label><input id="idp_name" style="height: 2.35em; margin-left: 1em; width: 14em; margin-bottom:1em;" name="idp_name" value="@Model.Appid"></input>
+                                    <form id="xmlForm" name="xmlForm">
+                                        @Html.AntiForgeryToken()
+                                        <p style="font-size: 1.19em;">Upload XML File:&emsp;</p>
+                                        <input id="xml" type="file" style="margin-top: 0em;"> <button type="button" onclick="uploadxml();" class="btn btn-primary" style="margin-left: 0em;">Upload</button>
+                                    </form>
+
+                                    <p style="font-size:13pt;text-align:center;"><b>OR</b></p>
+                                    <form id="xmlurlForm" name="xmlurlForm">
+                                        @Html.AntiForgeryToken()
+                                        <p style="font-size: 1.19em;">Enter metadata URL:</p><input id="xmlurl" type="text" style="margin-top: -1em;" placeholder= "Add Metadata URL here" required> <button type="button" onclick="fetchxml();" class="btn btn-primary">Fetch Metadata</button>
+                                    </form>
+		    
+                                </div>
+                            </div>
+                        </div>
+                            <div class="" style="width: 100%; padding-left: 15px;">
+                            <form id="form1" action="@Model.PageURL?ssoaction=config&tab=appconfig&appid=@Model.Appid&multitenant=@Model.isMultiTenant" method="post">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="appconfig" value="true">
+                                <input type="hidden" id="isMultitenantID" name="isMultitenant" value="@Model.isMultiTenant" />
+                                <h3><label>Identity Provider Settings</label></h3>
+                                <div style="margin-top: -3em;margin-left: 30em;display: flex;gap: 0.375em;">
+                                    <button type="button" id="modal-btn" class="btn btn-primary" style="width: 168px;">Upload IDP Metadata</button>
+                                    <label class="dropdown_1">
+                                        <div class="dd-button" class="btn btn-primary">Setup Guides</div>
+                                        <input type="checkbox" class="dd-input" id="test">
+
+                                        <ul class="dd-menu">
+                                                    @if (!String.IsNullOrEmpty(setupguide))
+                                                    {
+                                                        <li><i class="bx bx-file" style="font-size:14px; color: indianred;"></i><a class="a_dropdown" href="@setupguide" target="_blank">Documentation</a></li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li><i class="bx bx-file" style="font-size:14px; color: indianred;"></i><a class="a_dropdown" href="https://plugins.miniorange.com/asp-net-saml-sso-setup-guides#steps" target="_blank">Documentation</a></li>
+                                                    }
+                                                    <hr style="margin:0px;"/>
+                                                    @if (!String.IsNullOrEmpty(videoguide))
+                                                    {
+                                                        <li><i class='bx bxl-youtube' style='font-size:16px; color: red;'></i><a class='a_dropdown' href='@videoguide' target='_blank'>Video Guide</a></li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li><i class='bx bxl-youtube' style='font-size:16px; color: red;'></i><a class='a_dropdown' href='https://www.youtube.com/watch?v=Wg1NaFuHfbw' target='_blank'>Video Guide</a></li>
+                                                    }
+                                        </ul>
+                                    </label>
+                                    </div>    
+                         <div class='form-group' style='margin-top: 1em;'>  
+                            <label class='required' for='idpname'>IDP Name</label><span id='alert_idp_name' style='color:red; margin-left:2em; font-weight:bold;'></span>
+                            <input type='text' class='form-inline' required name='idpname' id='idpname' placeholder='name' value='@Model.Appid' readonly>
+                            <label class='required' for='idp_eid'>IDP Entity ID / Issuer</label>
+                            <input type='text' class='form-inline' required name='idp_issuer' id='idp_eid' placeholder='IDP Entity ID' value='@idpconfig["idp_issuer"]'/>
+                                    <label class='required' for='sso_url'> Single Sign-On Url</label>
+                                    <input type='text' class='form-inline' name='ssourl' required id='sso_url' placeholder='Single Sign On URL' value='@idpconfig["ssourl"]'/>
+                                    <label class='required' for='cert'>SAML X509 Certificate</label>
+                                    <textarea rows='5' required class='form-inline' cols='50' name='idp_cert' id='cert' placeholder='x509 Signing Certificate'>@idpconfig["idp_cert"]</textarea><br>
+                                    <div class='trial-border hovertext1' style='margin-right: 24px;' data-hover='The features listed below are available in the Premium+ version of the module. To find out more, kindly click the crown icon.'>
+                                        <a class='prem tags' style='position: absolute; right: 6px; font-size:16; margin-top: -14px; color: goldenrod;' target='_blank' href='https://plugins.miniorange.com/asp-dot-net-saml-2-0-single-sign-sso-connector#plans'><img src='https://i.ibb.co/nzFYw3v/crown-1.png' style='width:40px; height:40px;'></a>
+                                        <label for='bindings'> SAML Login Binding types</label><br>
+                                        <input type='radio' name='loginbinding' value='http-redirect' checked><label> Http-Redirect</label>
+                                        &nbsp;&nbsp;
+                                        <input type='radio' name='loginbinding' id='sso_url' value='http-post' disabled><label>Http-Post</label><br><br>
+                                        <label for='bindings'> SAML Logout Binding types</label><br>
+                                        <input type='radio' name='logoutbinding' value='logout-http-redirect' checked><label> Http-Redirect</label>
+                                        &nbsp;&nbsp;
+                                        <input type='radio' name='logoutbinding' id='sso_url' value='logout-http-post' disabled><label> Http-Post</label><br><br>
+                                        <label for='idpslo_url'> SAML Logout Url</label>
+                                        <input type='text' class='form-inline' name='idpslourl' id='idpslo_url' placeholder='SAML Logout Url' readonly>
+                                        <br><input type='hidden' name='idpconfig'>
+                                        <input type='checkbox' name='loginoptions' value='signedloginreq' disabled>
+                                        <label style='padding:5px;'>Signed Login Request</label><br>
+                                        <input type='checkbox' name='loginoptions' value='signedlogoutreq' disabled>
+                                        <label style='padding:5px;'>Signed Logout Request</label><br>
+                                        <input type='checkbox' name='loginoptions' value='signedlogoutreq' disabled>
+                                        <label style='padding:5px;'>Encrypted Assertion</label><br>
+                                    </div>
+                                    </div><input type='submit' value='Save' class='btn btn-primary' id='idp_config_save'>
+                            <input type='button' style='margin-left:7px;' onclick='testconfiguration()' value='TestConfiguration' class='btn btn-primary'>
+      
+    
+                        </form>
+</div>
+
+<script>
+// Get DOM Elements
+const modal = document.querySelector('#my-modal');
+const modalBtn = document.querySelector('#modal-btn');
+const closeBtn = document.querySelector('#close-btn');
+
+// Events
+modalBtn.addEventListener('click', openModal);
+closeBtn.addEventListener('click', closeModal);
+window.addEventListener('click', outsideClick);
+
+// Open
+function openModal() {
+  var changed_name = document.getElementById('idpname').value;
+  document.getElementById('idp_name').value = changed_name;
+  //document.getElementById('idp_name_hidden').value = changed_name;
+  modal.style.display = 'block';
+}
+
+// Close
+function closeModal() {
+  modal.style.display = 'none';
+}
+
+// Close If Outside Click
+function outsideClick(e) {
+  if (e.target == modal) {
+    modal.style.display = 'none';
+  }
+}
+
+function checkIdPName(){
+    if('@Model.NewList' == '')
+    { 
+        console.log('disallow change idp name');
+        
+        document.getElementById('change_idp').style.display = 'none';
+        document.getElementById('change_idp_link').style.display = 'none';
+        document.getElementById('modal-btn').style.marginLeft = '14em';
+       
+    }
+    else{
+        document.getElementById('modal-btn').style.marginLeft = '0';
+        document.getElementById('change_idp').style.display = 'block';
+        document.getElementById('change_idp_link').style.display = 'block';
+    }
+
+    
+    
+}
+
+
+
+                            function uploadxml() {
+
+                                var selectedFile = document.getElementById('xml').files[0];
+                                if (selectedFile == null || selectedFile == '') {
+                                    alert('Please choose the Metadata file');
+                                }
+                                var selectedFile_name = document.getElementById('xml').files[0].name;
+                                var isMulitenant = document.getElementById('isMultitenantID').value;
+                                var idp_name = document.getElementById('idp_name').value;
+                                var extension_name = selectedFile_name.substring(selectedFile_name.lastIndexOf('.') + 1, selectedFile_name.length) || selectedFile_name;
+                                var fileData = new FormData();
+                                fileData.append(selectedFile.name, selectedFile);
+                                var appbaseurl = $('#appbaseurl').val();
+                                if (extension_name == 'xml') {
+                                    $.ajax({
+                                        url: appbaseurl + '?ssoaction=config&option=uploadmetadata&idp_name=' + idp_name + '&multitenant=' + isMulitenant,
+                                        type: 'post',
+                                        datatype: 'json',
+                                        contentType: false,
+                                        processData: false,
+                                        async: false,
+                                        data: fileData,
+                                        success: function (response) {
+                                            closeModal();
+                                            console.log('inside upload modal');
+                                            document.getElementById('xml').value = null;
+                                            window.location.href = appbaseurl + '?ssoaction=config';
+                                            //window.location.href = window.location.href;
+                                        }
+                                    });
+                                }
+                                else {
+                                    alert('Wrong file uploaded! Please upload XML Metadata file');
+                                }
+
+
+                            }
+
+                            function fetchxml() {
+                                var appbaseurl = $('#appbaseurl').val();
+                                var idp_name = document.getElementById('idp_name').value;  
+                                var xmlurl = document.getElementById('xmlurl').value;
+                                var fileData = new FormData();
+                                fileData.append("url", xmlurl);
+                                var isMulitenant = document.getElementById('isMultitenantID').value;
+                                if (xmlurl == '') {
+                                    alert('Please enter the Metadata URL in the input !!');
+                                }
+                                else {
+                                    $.ajax({
+                                        url: appbaseurl + '?ssoaction=config&option=fetchmetadata&idp_name=' + idp_name + '&multitenant=' + isMulitenant,
+                                        type: 'post',
+                                        datatype: 'json',
+                                        contentType: false,
+                                        processData: false,
+                                        async: false,
+                                        data: fileData,
+                                        success: function (response) {
+                                            closeModal();
+                                            document.getElementById('xmlurl').value = null;
+                                            window.location.href = appbaseurl + '?ssoaction=config';
+                                        }
+                                    });
+                                }
+                            }
+
+
+
+                        </script>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class='suport'>
+                <div class='tile'>
+                    <form id='form1' action='@Model.Baseurl?ssoaction=config&tab=supportApp' method='post'>
+                        @Html.AntiForgeryToken()
+                    <input type='hidden' name='option' value='support'>
+        
+          <div class='form-group' style='margin-top: 5px;'>  
+        <label><h3>Contact Us</h3></label>
+        <p>Need any help? Just send us a query so we can help you.</p><br />
+        <label for='cust_email'>Email</label>
+           <input type='email' required class='form-inline' style='border-left: 4px solid red; color: black;' id='cust_email' name='mo_admin_email' placeholder='Enter your Email' style='background-color:#F0F0F0;'>
+        <label for='cust_name'>Name</label>
+           <input type='text' required class='form-inline' style='border-left: 4px solid red; color: black;width:100%;' id='cust_name' name='mo_admin_name' placeholder='Enter your name'>
+		   
+        <label for='cust_query'>Query :</label><br>
+           <textarea required style='width:100%;;'class='form-inline' name='mo_admin_query' rows='4' cols='50' placeholder='Write your query here'></textarea>
+</div><input type='submit' value='Submit' class='btn btn-primary' onclick='popup_success()'>  <br><br> 
+<p>If you want custom features in the plugin, just drop an email at <a href='mailto:aspnetsupport@xecurify.com'>aspnetsupport@xecurify.com</a>.</p>
+   <script>function popup_success(){alert('We have received your query, our support executive will reach out to you soon.')}</script> 
+</form></div>
+            </div>
+<div>
+
+</div>
+<script>
+    function testconfiguration()
+    {
+        var myWindow = window.open('@Model.PageURL?ssoaction=config&option=testconfig&appid=@Model.Appid', '', 'width = 670,height = 530');
+     }
+    </script>
+
+
+</body>
+</html>

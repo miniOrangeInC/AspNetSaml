@@ -1,0 +1,65 @@
+﻿@using miniOrange.saml;
+@model miniOrange.saml.Model.AdminLoginModel;
+
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/solid.min.css">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/mo_maincss.css" asp-append-version="true" />
+    <style>
+        #forgot-password-link 
+        {
+            text-align: center;
+            color: #385898;
+            cursor: pointer;
+        }
+</style>
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <section class='material-half-bg'>
+      <div class='cover'></div>
+    </section>
+    <form id='form1' action='@Model.Baseurl?ssoaction=config&option=login' method='post'>
+        @Html.AntiForgeryToken()
+        <section class='login-content'>
+      <div class='col-md-6'>
+                <div class='tile'>
+                    <h3 class='tile-title'>Login with your plugin's admin credentials</h3>
+                    <input type='hidden' name='option' value='login' />
+                    <div class='tile-body'>
+
+                        <div class='form-group row flexed-vertically'>
+                            <label class='control-label col-md-3'><span class="required"></span>Email</label>
+                  <div class='col-md-8'>
+                                <input type='email' class='form-control' placeholder='Enter your mail' style='float:left;' name='email' required='' value="@Model.Email" />
+                  </div>
+                </div>
+                        <div class='form-group row flexed-vertically'>
+                            <label class='control-label col-md-3'>
+                                <span class="required"></span>Password
+                                <i class='fa-solid fa-circle-info' data-toggle='tooltip' title='Password should contain (1 uppercase, 1 lowercase, 1 number, 1 special (~!#$%^&*()\-+.) ) characters each'></i>
+                            </label>
+                <div class='col-md-8'>
+                        <input type='password' class='form-control' placeholder='Enter Password' style='float:left;' name='password' required='' />
+                </div>
+                </div>
+            </div>
+            <div class='tile-footer'>
+              <div class='row'>
+                <div class='col-md-8 col-md-offset-3'>
+                      <input type='submit' class='btn btn-primary' style='width:20%;' value='Login'>                   
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+    </form>
+  
+    </body>
+</html>

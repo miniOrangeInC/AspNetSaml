@@ -1,0 +1,362 @@
+﻿@using Microsoft.AspNetCore.Html;
+@using miniOrange.saml;
+@using miniOrange.saml.Model;
+@using miniOrange.saml.Utility;
+@model miniOrange.saml.Model.AppConfigModel;
+
+@{
+
+}
+
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/solid.min.css">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/mo_maincss.css" asp-append-version="true" />
+    <style>
+        {
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        *:focus {
+            outline: none;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background-color: #f1f9f9;
+        }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+    <script type="text/javascript">
+        function aspdotnet_saml_client_default_apps_input_filter() {
+            var cust_idp_index = parseInt($("#cust_idp_index").val());
+            var input, filter, ul, li, a, i, txtValue;
+            var counter = 0;
+            input = document.getElementById("aspdotnet_saml_client_default_apps_input");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("aspdotnet_saml_client_searchable_apps");
+            li = ul.getElementsByTagName("li");
+            for (i = 0; i < li.length; i++) {
+                // console.log("li.length = " + li.length);
+                a = li[i].getElementsByTagName("a")[0];
+                txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                    counter++;
+                }
+                if (counter >= li.length) {
+                    li[cust_idp_index].style.display = "";
+                } else {
+                    document.getElementById("aspdotnet_saml_client_search_res").innerHTML = "";
+                }
+            }
+        }
+        function showAlert() {
+            localStorage.setItem("success_message", "Configuration saved successfully!");
+            // console.log("inside show alert method");
+            if ($("#myAlert").find("div#myAlert2").length == 0) {
+                $("#myAlert").append("<div class=\"alert alert-success alert-dismissable\" id=\"myAlert2\"> <button type=\"button\" class=\"close\" data-dismiss=\"alert\"  aria-hidden=\"true\">&times;</button> Configuration saved successfully!</div>");
+            }
+            $("#myAlert").css("display", "");
+            // console.log("end");
+        }
+
+        function closeAlert() {
+            // console.log("close alert");
+            $("#notice").slideUp(1000, function () {
+                $(this).remove();
+            });
+        }
+        const Toast = {
+            init() {
+                this.hideTimeout = null;
+
+                this.el = document.createElement("div");
+                this.el.className = "toast";
+                document.body.appendChild(this.el);
+            },
+
+            show(message, state) {
+                clearTimeout(this.hideTimeout);
+
+                this.el.textContent = message;
+                this.el.className = "toast toast--visible";
+
+                if (state) {
+                    this.el.classList.add(`toast--${state}`);
+                }
+
+                this.hideTimeout = setTimeout(() => {
+                    this.el.classList.remove("toast--visible");
+                }, 3000);
+            }
+        };
+
+        document.addEventListener("DOMContentLoaded", () => Toast.init());
+    </script>
+</head>
+<body>
+    <header class="app-header" style="padding-top:1em; width:102%;display:flex;justify-content:space-between">
+        <div style="margin-left: 1em;">
+            <h3 style="font-weight:normal;"><img src="https://plugins.miniorange.com/wp-content/uploads/2022/05/dnn-miniorange-guide-logo.webp" style="width:6%; margin-right: 0.375em;"></img>miniOrange ASP.NET SAML SSO Middleware v7.0.2</h3>
+        </div>
+        <div class="drpdwn" style="margin-right:1%;">
+            <button class="dropbtn">
+                <div style="display:flex;">
+                    <i class="fa fa-user fa-lg" style="margin-top:2%;"></i>
+                    <span style="margin-left: 10px;"> @Model.AdminEmail</span>
+                </div>
+            </button>
+            <div class="drpdwn-content">
+                <a href="@Model.Baseurl?ssoaction=config&option=logout">Logout</a>
+                <a href="@Model.Baseurl?ssoaction=config&tab=account">Account Setup</a>
+            </div>
+        </div>
+
+    </header>
+
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside class="app-sidebar">
+        <div class="app-sidebar__user" style="padding-left: 40px">
+            <div style="margin-left: 15px;">
+                <p class="app-sidebar__user-name">ASP.NET SAML</p>
+                <p class="app-sidebar__user-designation">Middleware v7.0.2</p>
+            </div>
+        </div>
+        <ul class="app-menu">
+            <li><a class="app-menu__item active" href="@Model.PageURL?ssoaction=config&tab=settings"><i class="app-menu__icon fa fa-cogs"></i><span class="app-menu__label">Identity Provider Settings</span></a></li>
+        </ul>
+    </aside>
+
+    <main class="app-content">
+        <div class="app-title" style="margin : -30px -30px 10px;">
+            <div>
+                <h1>
+                    <a href="@Model.Baseurl?ssoaction=config&tab=applicationlist">
+                        <div data-toggle="tooltip" title="Back to Application List" style="margin-right: 15px; font-weight: bolder; color: #0085ba;" class="bx bx-left-arrow-circle">
+                        </div>
+                    </a>Select Your IdP Provider
+                </h1>
+
+            </div>
+
+
+        </div>
+        <div class="container" style="display: none;" id="myAlert">
+            <div class="alert alert-success alert-dismissable" id="myAlert2">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <p id=successmsg></p>
+            </div>
+        </div>
+        <script>document.getElementById("successmsg").innerHTML = localStorage.getItem("success_message");</script>
+        <input type="hidden" id="appbaseurl" value="@Model.Baseurl">
+        <div id="notice"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile" style="margin-top: 10px;">
+                    <div class="row">
+                        <div id="setupcall-modal" class="modal">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2 style="float:left;margin-left:15%">Set Up a Call / Screen-share session</h2>
+                                    <span class="close" id="call-close-btn">&times;</span>
+                                </div>
+                                <div class="modal-body" style="margin: auto;padding: 30px;">
+                                    <div id="mo_setup_call_layout" class="mo_support_layout">
+                                        <form id="setupCallForm" name="setupCallForm" method="post" action="@Model.Baseurl?ssoaction=config&option=setupcall">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="option" value="mo_oauth_setup_call_option" />
+                                            <table class="mo_settings_table" cellpadding="2" cellspacing="2">
+                                                <tr>
+                                                    <td><strong><font color="#FF0000">*</font>Email:</td></strong></td>
+                                                    <td><input class="mo_callsetup_table_textbox" type="email" placeholder="Enter a valid E-mail address here" name="mo_oauth_setup_call_email" value="" style="width:100%;" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong><font color="#FF0000">*</font>Issue:</td></strong></td>
+                                                    <td>
+                                                        <select id="issue_dropdown" class="mo_callsetup_table_textbox" name="mo_oauth_setup_call_issue" style="width:100%;" required>
+                                                            <option disabled selected>--------Select Issue type--------</option>
+                                                            <option id="sso_setup_issue">SSO Setup Issue</option>
+                                                            <option id="integration_issue">Issue with Integration</option>
+                                                            <option>Custom requirement</option>
+                                                            <option id="other_issue">Other</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr id="setup_guide_link" style="display: none;">
+                                                    <td colspan="2"><br>Have you checked the setup guide <a href="https://plugins.miniorange.com/asp-dot-net-saml-2-0-single-sign-sso-connector#steps" target="_blank">here</a>?<br><br></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong><font id="required_mark" color="#FF0000" style="display: none;">*</font>Description:</td></strong></td>
+                                                    <td><textarea id="issue_description" class="mo_callsetup_table_textbox" name="mo_oauth_setup_call_desc" minlength="15" placeholder="Any queries like oecnajdnacdmv jvndf avdd will not be answered" rows="4" style="width:100%;"></textarea></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong><font color="#FF0000">*</font>Date:</td></strong></td>
+                                                    <td><input class="mo_callsetup_table_textbox" name="mo_oauth_setup_call_date" type="text" id="calldate" style="width:100%;" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong><font color="#FF0000">*</font>Time(Local):</td></strong></td>
+                                                    <td><input class="mo_callsetup_table_textbox" name="mo_oauth_setup_call_time" type="time" id="mo_oauth_setup_call_time" style="width:100%;" required></td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td></td>
+                                                    <td><br><p style="text-align:center;">We are available from 3:30 to 18:30 UTC</p><br></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td><br><button type="submit" onclick="" class="btn btn-primary">Submit Request</button></td>
+                                                    <br>
+                                                </tr>
+                                            </table>
+
+                                            <input type="hidden" name="mo_oauth_time_diff" id="mo_oauth_time_diff" />
+                                        </form>
+                                    </div>
+                                    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+                                    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+                                    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="pt-3-idplist pr-5-idplist pb-5-idplist pl-5-idplist shadow-cstm-idplist bg-cstm-idplist rounded-idplist">
+                                <h6 style="font-size: large;">Search Application</h6>
+                                <input type="text" id="aspdotnet_saml_client_default_apps_input" onkeyup="aspdotnet_saml_client_default_apps_input_filter()" placeholder="Select application (eg. Azure AD)" title="Type in a Application Name" style="width: 100%;max-width: 100%;" />
+                                <br />
+                                <p class="mo_para-idplist" style="font-size: inherit;">Select your Identity Provider from the list below, if you don"t find your IDP in the list, go with Custom IDP.</p>
+                                <fieldset>
+                                    <div id="aspdotnet_saml_client_search_res"></div>
+                                    <div id="aspdotnet_saml_client_searchable_apps">
+                                        <ul id="aspdotnet_saml_client_default_apps" class="mo-flex-container mo-wrap">
+                                            @{
+                                                SvgLists svglister = new SvgLists();
+
+                                                Apps applister = new Apps();
+                                                Dictionary<string, Dictionary<string, string>> appslist = applister.getApps();
+
+                                                Dictionary<string, string> newApp = null;
+                                                Dictionary<string, string> svglist = null;
+                                                svglist = svglister.getSvgslist();
+                                                int cur_index = -1;
+                                                int cust_idp_index = 0;
+                                                string newSvg = "";
+                                                foreach (var app in appslist)
+                                                {
+                                                    cur_index++;
+                                                    string defappname = app.Key;
+                                                    newApp = app.Value;
+                                                    newSvg = svglist[defappname];
+                                                    string label = newApp["label"];
+                                                    var htmlString = new HtmlString(newSvg);
+                                                    if (label == "Custom IDP")
+                                                    {
+                                                        cust_idp_index = cur_index;
+                                                    }
+
+                                                    // Adding a parameter in the URL to define if a apptype is multitenant or not
+                                                    bool isMultiTenantApp = false;
+                                                    if (defappname == "multi-tenant-app" || defappname == "azure-ad" || defappname == "azure-b2c" || defappname == "office365")
+                                                    {
+                                                        isMultiTenantApp = true;
+                                                    }
+                                                    string idpurl = "?ssoaction=config&tab=appconfig&newappid=" + defappname + "&multitenant=" + isMultiTenantApp.ToString().ToLower();
+
+                                                    <li class="mo-flex-item">
+                                                        <a href="@Model.Baseurl@idpurl" class="aspdotnet_saml_client_default_app_icon" style="text-decoration: none;color: black;font-size:small;">@Html.Raw(htmlString)<br />@label</a>
+                                                    </li>
+                                                }
+                                            }
+                                        </ul>
+                                        <input type="hidden" id="cust_idp_index" name="cust_idp_index_" value="@cust_idp_index" />
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <hr />
+                            <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+                            <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+                            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+                            <script>
+
+                                // Get DOM Elements
+
+                                const callmodal = document.querySelector("#setupcall-modal");
+                                const callmodalBtn = document.querySelector("#setupcall-modal-btn");
+                                const callcloseBtn = document.querySelector("#call-close-btn");
+
+                                // Events
+                                callmodalBtn.addEventListener("click", callopenModal);
+                                callcloseBtn.addEventListener("click", callcloseModal);
+                                window.addEventListener("click", calloutsideClick);
+
+                                // Open
+                                function callopenModal() {
+                                    callmodal.style.display = "block";
+                                }
+
+                                // Close
+                                function callcloseModal() {
+                                    callmodal.style.display = "none";
+                                }
+
+                                // Close If Outside Click
+                                function calloutsideClick(e) {
+                                    if (e.target == callmodal) {
+                                        callmodal.style.display = "none";
+                                    }
+                                }
+
+                                jQuery("#setup_call_button").click(function () {
+                                    jQuery("#mo_setup_call_layout").css({ "display": "block", "margin-bottom": "20px" });
+                                });
+                                jQuery("#calldate").datepicker({
+                                    dateFormat: "d MM, yy",
+                                    beforeShowDay: $.datepicker.noWeekends,
+                                    minDate: 1,
+                                });
+                                jQuery("#issue_dropdown").change(function () {
+                                    if (document.getElementById("sso_setup_issue").selected) {
+                                        document.getElementById("setup_guide_link").style.display = "table-row";
+                                    }
+                                    else {
+                                        document.getElementById("setup_guide_link").style.display = "none";
+                                    }
+                                    if (document.getElementById("other_issue").selected) {
+                                        document.getElementById("required_mark").style.display = "inline";
+                                        document.getElementById("issue_description").required = true;
+                                    }
+                                    else {
+                                        document.getElementById("required_mark").style.display = "none";
+                                        document.getElementById("issue_description").required = false;
+                                    }
+                                });
+                                var d = new Date();
+                                var n = d.getTimezoneOffset();
+                                document.getElementById("mo_oauth_time_diff").value = n;
+
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,36 @@
+﻿@page
+@model miniOrangeDemoApp.Pages.LoginModel
+@{
+    ViewData["Title"] = "Login page";
+    string SSOUrl = $"{HttpContext.Request.Path}?ssoaction=login";
+}
+
+<div class="p-5">
+
+    <div style="padding: 0% 20%;">
+        <h4>Login</h4>
+    </div>
+
+    <div class="tab-content mt-4" style="padding: 0% 20%;">
+        <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+            <form method="post">
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="email" id="loginName" name="Email" class="form-control" placeholder="Enter your E-mail" required />
+                </div>
+
+                <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="password" id="loginPassword" name="Password" class="form-control" placeholder="Enter your password" required />
+                </div>
+                <div style="display: flex; gap: 20px;">
+                    <button type="submit" name="formType" value="login" class="btn btn-primary">Sign in</button>
+                    <button class="btn btn-primary" onclick="window.location.href='@(SSOUrl)'">Login with SSO</button>
+                </div>
+
+            </form>
+            <p style="font-size: 14px;margin: 10px 0px 0px 0px;border: 1px solid #b0e9b0;border-radius: 3px;padding: 5px;background: #d1e9d1;"><strong>Note: </strong> To configure SSO with your IDP, click on <b>Configure-SSO</b> button that you can find at top right corner and follow <a href="https://plugins.miniorange.com/asp-net-core-saml-sso-setup-guides" target="_blank"><b>this guide</b></a> from <b>Step 2</b> for setup!</p>
+        </div>
+    </div>
+
+    
+
+</div>

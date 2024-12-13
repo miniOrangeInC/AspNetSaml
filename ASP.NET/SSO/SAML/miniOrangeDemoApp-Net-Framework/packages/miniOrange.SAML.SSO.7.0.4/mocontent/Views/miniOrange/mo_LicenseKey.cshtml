@@ -1,0 +1,179 @@
+﻿@using Newtonsoft.Json;
+@using miniOrange.saml;
+@model miniOrange.saml.Model.AdminLoginModel;
+
+@{
+
+}
+
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/solid.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/mo_maincss.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <header class="app-header" style="padding-top:1em; width:102%;display:flex;justify-content:space-between">
+        <div style="margin-left: 1em;">
+            <h3 style="font-weight:normal;"><img src="https://plugins.miniorange.com/wp-content/uploads/2022/05/dnn-miniorange-guide-logo.webp" style="width:6%; margin-right: 0.375em;"></img>miniOrange ASP.NET SAML SSO Middleware v7.0.4</h3>
+        </div>
+        <div class="drpdwn" style="margin-right:1%">
+            <button class="dropbtn">
+                <div style="display:flex;">
+                    <i class="fa fa-user fa-lg" style="margin-top:5%;"></i>
+                    <span style="margin-left: 10px;"> @Model.Email</span>
+                </div>
+            </button>
+            <div class="drpdwn-content">
+                <a href="@Model.Baseurl?ssoaction=config&option=logout">Logout</a>
+                <a href="@Model.Baseurl?ssoaction=config&tab=account">Account Setup</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+
+    <aside class="app-sidebar">
+        <div class="app-sidebar__user" style="padding-left: 40px">
+            <div style="margin-left: 15px;">
+                <p class="app-sidebar__user-name">ASP.NET SAML</p>
+                <p class="app-sidebar__user-designation">Middleware v7.0.4</p>
+            </div>
+        </div>
+        <ul class="app-menu">
+            <li><a class="app-menu__item active" href=""><i class="app-menu__icon fa fa-user-circle"></i><span class="app-menu__label">Account Setup</span></a></li>
+        </ul>
+    </aside>
+
+    <main class="app-content" style="margin-top: 28px;">
+        <div class="app-title">
+            <div>
+                <h1><a href="@Model.Baseurl?ssoaction=config&tab=applicationlist"><i class="bx bx-left-arrow-circle" style="margin-right: 15px; font-weight: bolder; color: #0085ba;"></i></a>Account Setup</h1>
+            </div>
+            <ul class="app-breadcrumb breadcrumb">
+                <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+                <li class="breadcrumb-item"><a href="#">Account Setup</a></li>
+            </ul>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                @if(!Model.isTrialLicenseVerified)
+                {
+                    <input type="hidden" id="appbaseurl" value="@Model.Baseurl">
+                    <div class="tile" style="margin-bottom: 25px !important; margin-top: -5px;">
+                        <div class="info_tour" role="alert" style="margin-bottom: 0em;border-color: #3a9aa2cc; padding-block: 1em; padding-left: 0; margin-left: 0; background:#e3f4fc;">
+                            <p style="margin: 0;padding: 0;margin-left: 1em;"><b>Welcome, <b>Download your license key</b> from the below given button and please upload the downloaded file below to activate the plugin.</b></p>
+                            <input type="button" class="btn btn-primary" style="margin-top:6px; margin-left:14px; background-color:#d61e52ad;" value="Download License Key" onclick="downloadlicensekey()" />
+                        </div>
+                    </div>
+                }
+
+                <div class="tile">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            @if (Model.isTrialLicenseVerified)
+                            {
+                                <form id="form1" action="@Model.Baseurl?ssoaction=config" method="post">
+                                    <input type="hidden" name="license" value="true">
+                                    <input type="hidden" name="option" value="mo_saml_deactivate_license" />
+                                    <div class="mo_saml_table_layout">
+                                        <h2>Thank you for registering with miniOrange.</h2>
+                                        <br />
+                                        <table border="1" style="background-color: #FFFFFF; border: 1px solid #CCCCCC; border-collapse: collapse; padding: 0px 0px 0px 10px; margin: 2px; width: 85%">
+                                            <tr>
+                                                <td style="width: 45%; padding: 10px;">miniOrange Account Email</td>
+                                                <td style="width: 55%; padding: 10px;">@Model.Email</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 45%; padding: 10px;">Customer ID</td>
+                                                <td style="width: 55%; padding: 10px;">@Model.Admin_CustomerKey</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </form>
+                            }
+                            else
+                            {
+                            
+                                <form id="form7" method="post" action="@Model.Baseurl">
+                                    <input type="hidden" name="license" value="true"/>
+                                        <div class="mo_saml_table_layout">
+                                            <h3>Verify Trial License File</h3>
+                                            <hr />
+                                            <div class="form-group">
+                                                <label for="saml_license_key"><b><font color="#FF0000">*</font>Upload the downloaded license file to activate the connector:</b></label>
+                                                <br/>
+                                                <input id="license" type="file" style="margin-top: 1em;"/>
+                                            </div>
+                                            <ol>
+                                            <li> It"s a <b>14 days</b> free trial.</li>
+                                            <br />
+                                            <li>This trial module enables Basic Single Sign-On (SSO) functionality in your application, allowing you to explore and experience all the features that are available to you. Take this opportunity to test and evaluate the capabilities of the trial module firsthand.</li>
+                                            <br>
+                                            <li>Take this opportunity to test and evaluate the capabilities of the trial module firsthand.</li>
+                                            <br>
+                                            <input type="checkbox" name="license_conditions" id="license_conditions" required>
+                                            <label>
+                                                <span class="label-text"><strong>I have read the above conditions and I want to activate the connector.</strong></span>
+                                            </label>
+                                            <br>
+                                            <input type="button" class="btn btn-primary" style="margin-top:13px;" value="Activate License" onclick="uploadLicense()"/>
+                                        </div>
+                                </form>
+                            }
+                        </div>
+
+                        <script>
+                            function uploadLicense() 
+                            {
+                                var selectedFile = document.getElementById("license").files[0];
+                                if (selectedFile == null || selectedFile == "") {
+                                    alert("Please choose the downloaded licnense file");
+                                }
+                                var selectedFile_name = document.getElementById("license").files[0].name;
+
+                                var isMulitenant = "false";
+                                var idp_name = "default";
+                                var extension_name = selectedFile_name.substring(selectedFile_name.lastIndexOf(".") + 1, selectedFile_name.length) || selectedFile_name;
+                                var fileData = new FormData();
+                                fileData.append(selectedFile.name, selectedFile);
+                                var appbaseurl = $("#appbaseurl").val();
+                                if (extension_name == "lic") {
+                                    $.ajax({
+                                        url: appbaseurl + "?ssoaction=config&option=checkLicenseFile&idp_name=" + idp_name + "&multitenant=" + isMulitenant,
+                                        type: "post",
+                                        datatype: "json",
+                                        contentType: false,
+                                        processData: false,
+                                        async: false,
+                                        data: fileData,
+                                        success: function (response) {
+                                            window.location.href = appbaseurl + "?ssoaction=config&tab=applicationlist";
+                                        }
+                                    });
+                                }
+                                else {
+                                    alert("Wrong file uploaded! Please upload Downloaded Licnse file");
+                                }
+                            }
+
+                            function downloadlicensekey() {
+                                var appbaseurl = $("#appbaseurl").val();
+                                window.location.href = appbaseurl + "?ssoaction=config&option=downloadLicenseKey";
+                            }
+
+                        </script>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</body>
+</html>

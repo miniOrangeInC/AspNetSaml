@@ -1,0 +1,654 @@
+﻿@using Newtonsoft.Json;
+@using miniOrange.saml;
+@using miniOrange.saml.Utility
+@model miniOrange.saml.Model.AppConfigModel;
+
+
+@{
+    Model.PageURL = Model.PageURL.Substring(0, Model.PageURL.IndexOf("?"));
+    Dictionary<string, string> appsdict = null;
+    Dictionary<string, string> newappsdict = null;
+    Dictionary<string, string> idpconfig = null;
+    string key_ser_list = "empty";
+    string newid = "true";
+    if (!String.IsNullOrEmpty(Model.AppList))
+    {
+        appsdict = JsonConvert.DeserializeObject<Dictionary<string, string>>(Model.AppList);
+        List<string> keyList = new List<string>(appsdict.Keys);
+        key_ser_list = JsonConvert.SerializeObject(keyList);
+    }
+    string idp_key = "";
+    if (String.IsNullOrEmpty(Model.NewList))
+    {
+        if (appsdict != null)
+        {
+            foreach (var app in appsdict)
+            {
+                idp_key = "appid";
+                if (app.Key == Model.Appid)
+                {
+                    string appconfig = app.Value;
+                    if (!String.IsNullOrEmpty(appconfig))
+                    {
+                        idpconfig = JsonConvert.DeserializeObject<Dictionary<string, string>>(appconfig);
+                    }
+                }
+            }
+        }
+
+    }
+    else
+    {
+        if (appsdict != null)
+        {
+            if (appsdict.ContainsKey(Model.Appid))
+            {
+                newid = "false";
+            }
+            else
+            {
+                newid = "true";
+            }
+        }
+        else
+        {
+            newid = "true";
+        }
+
+        newappsdict = JsonConvert.DeserializeObject<Dictionary<string, string>>(Model.NewList);
+        if (newappsdict != null)
+        {
+            idp_key = "newappid";
+            foreach (var app in newappsdict)
+            {
+                if (app.Key == Model.Appid)
+                {
+                    string appconfig = app.Value;
+                    if (!String.IsNullOrEmpty(appconfig))
+                    {
+                        idpconfig = JsonConvert.DeserializeObject<Dictionary<string, string>>(appconfig);
+                    }
+                }
+            }
+        }
+    }
+}
+
+<html>
+<head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/solid.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/mo_maincss.css" asp-append-version="true" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+</head>
+<style>
+
+
+    *:focus {
+        outline: none;
+    }
+
+    body {
+        margin: 0;
+        background-color: #f1f9f9;
+    }
+
+    #app-cover {
+        display: table;
+        width: 600px;
+        margin: 80px auto;
+        counter-reset: button-counter;
+    }
+
+    .toggle-button-cover {
+        display: table-cell;
+        position: relative;
+        width: 100px;
+        height: 50px;
+        box-sizing: border-box;
+    }
+
+
+    .button-cover, .knobs, .layer {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    .button {
+        position: relative;
+        top: 50%;
+        width: 74px;
+        height: 36px;
+        margin: -20px auto 0 auto;
+        overflow: hidden;
+    }
+
+        .button.r, .button.r .layer {
+            border-radius: 100px;
+        }
+
+        .button.b2 {
+            border-radius: 2px;
+        }
+
+    .checkbox {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        opacity: 0;
+        cursor: pointer;
+        z-index: 3;
+    }
+
+    .knobs {
+        z-index: 2;
+    }
+
+    .layer {
+        width: 100%;
+        background-color: #ebf7fc;
+        transition: 0.3s ease all;
+        z-index: 1;
+    }
+
+    #button-1 .knobs:before {
+        content: "NO";
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        width: 30px;
+        height: 30px;
+        color: #fff;
+        font-size: 10px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 1.5;
+        padding: 9px 4px;
+        background-color: #f44336;
+        border-radius: 50%;
+        transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+    }
+
+    #button-1 .checkbox:checked + .knobs:before {
+        content: "YES";
+        left: 42px;
+        background-color: #03A9F4;
+    }
+
+    #button-1 .checkbox:checked ~ .layer {
+        background-color: #fcebeb;
+    }
+
+    #button-1 .knobs, #button-1 .knobs:before, #button-1 .layer {
+        transition: 0.3s ease all;
+    }
+
+    #forgot-password-link {
+        text-align: center;
+        color: #385898;
+        cursor: pointer;
+    }
+
+    *:focus {
+        outline: none;
+    }
+
+    body {
+        margin: 0;
+        background-color: #f1f9f9;
+    }
+
+    #app-cover {
+        display: table;
+        width: 600px;
+        margin: 80px auto;
+        counter-reset: button-counter;
+    }
+
+    .toggle-button-cover {
+        display: table-cell;
+        position: relative;
+        width: 100px;
+        height: 50px;
+        box-sizing: border-box;
+    }
+
+
+    .button-cover, .knobs, .layer {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    .button {
+        position: relative;
+        top: 50%;
+        width: 74px;
+        height: 36px;
+        margin: -20px auto 0 auto;
+        overflow: hidden;
+    }
+
+        .button.r, .button.r .layer {
+            border-radius: 100px;
+        }
+
+        .button.b2 {
+            border-radius: 2px;
+        }
+
+    .checkbox {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        opacity: 0;
+        cursor: pointer;
+        z-index: 3;
+    }
+
+    .knobs {
+        z-index: 2;
+    }
+
+    .layer {
+        width: 100%;
+        background-color: #ebf7fc;
+        transition: 0.3s ease all;
+        z-index: 1;
+    }
+
+    #button-1 .knobs:before {
+        content: "NO";
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        width: 30px;
+        height: 30px;
+        color: #fff;
+        font-size: 10px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 1.5;
+        padding: 9px 4px;
+        background-color: #f44336;
+        border-radius: 50%;
+        transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+    }
+
+    #button-1 .checkbox:checked + .knobs:before {
+        content: "YES";
+        left: 42px;
+        background-color: #03A9F4;
+    }
+
+    #button-1 .checkbox:checked ~ .layer {
+        background-color: #fcebeb;
+    }
+
+    #button-1 .knobs, #button-1 .knobs:before, #button-1 .layer {
+        transition: 0.3s ease all;
+    }
+
+
+    .tooltipx {
+        position: relative;
+        display: inline-block;
+    }
+
+        .tooltipx .tooltiptextx {
+            visibility: hidden;
+            width: var(--widthx);
+            background-color: #1d1515d6;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            font-size: 13px;
+            font-family: "Helvetica Neue";
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+        }
+
+
+        .tooltipx:hover .tooltiptextx {
+            visibility: visible;
+        }
+</style>
+
+
+
+<script type="text/javascript">
+    $(document).on(
+        "click",
+        "[data-role=dynamic-fields] > .form-inline [data-role=remove]",
+        function (e) {
+            e.preventDefault();
+            $(this).closest(".form-inline").remove();
+        }
+    );
+    $(document).on(
+        "click",
+        "[data-role=dynamic-fields] > .form-inline [data-role=add]",
+        function (e) {
+            e.preventDefault();
+            var container = $(this).closest("[data-role=dynamic-fields]");
+            new_field_group = container.children().filter(".form-inline:first-child").clone();
+            new_field_group.find("input").each(function () {
+                $(this).val("");
+            });
+            container.append(new_field_group);
+        }
+    );
+</script>
+
+<body>
+    <header class="app-header" style="padding-top:1em; width:102%;display:flex;justify-content:space-between">
+        <div style="margin-left: 1em;">
+            <h3 style="font-weight:normal;"><img src="https://plugins.miniorange.com/wp-content/uploads/2022/05/dnn-miniorange-guide-logo.webp" style="width:6%; margin-right: 0.375em;"></img>miniOrange ASP.NET SAML SSO Middleware v7.0.4</h3>
+        </div>
+        <div class="drpdwn" style="margin-right:1%">
+            <button class="dropbtn">
+                <div style="display:flex;">
+                    <i class="fa fa-user fa-lg" style="margin-top:5%;"></i>
+                    <span style="margin-left: 10px;"> @Model.AdminEmail</span>
+                </div>
+            </button>
+            <div class="drpdwn-content">
+                <a href="@Model.Baseurl?ssoaction=config&option=logout">Logout</a>
+                <a href="@Model.Baseurl?ssoaction=config&tab=account">Account Setup</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="app-sidebar__overlay" data-toggle="sidebar">
+    </div>
+    <aside class="app-sidebar">
+        <div class="app-sidebar__user" style="padding-left: 40px">
+            <div style="margin-left: 15px;">
+                <p class="app-sidebar__user-name">ASP.NET SAML</p>
+                <p class="app-sidebar__user-designation">Middleware v7.0.4</p>
+            </div>
+        </div>
+        <ul class="app-menu">
+            <li><a class="app-menu__item" href="@Model.PageURL?ssoaction=config&tab=appconfig&@idp_key=@Model.Appid&multitenant=@Model.isMultiTenant"><i class="app-menu__icon fa fa-cogs"></i><span class="app-menu__label">Identity Provider Settings</span></a></li>
+            <li><a class="app-menu__item active" href="@Model.Baseurl?ssoaction=config&tab=attributeandrolemapping&appid=@Model.Appid&multitenant=@Model.isMultiTenant"><i class="app-menu__icon fa fa-user-plus"></i><span class="app-menu__label">Attribute/Role Mapping</span></a></li>
+            <li><a class="app-menu__item" href="@Model.Baseurl?ssoaction=config&tab=loginsetup&appid=@Model.Appid&multitenant=@Model.isMultiTenant"><i class="app-menu__icon fa fa-key"></i><span class="app-menu__label">Login Settings</span></a></li>
+            <li><a class="app-menu__item" href="@Model.Baseurl?ssoaction=config&tab=integrationcode&appid=@Model.Appid&multitenant=@Model.isMultiTenant"><i class="app-menu__icon bx bx-code-alt"></i><span class="app-menu__label">Integration Steps</span></a></li>
+            <li><a class="app-menu__item" href="@Model.Baseurl?ssoaction=config&tab=troubleshoot&appid=@Model.Appid&multitenant=@Model.isMultiTenant"><i class="app-menu__icon bx bxs-grid"></i><span class="app-menu__label">Troubleshooting</span></a></li>
+            <li><a class="app-menu__item" href="https://faq.miniorange.com/kb/asp-net/" target="_blank"><i class="app-menu__icon bx bx-help-circle"></i><span class="app-menu__label">FAQs</span><i class="app-menu__icon bx bx-link-external"></i></a></li>
+        </ul>
+    </aside>
+
+    <main class="app-content">
+        <div class="app-title">
+            <div>
+                <h1>
+                    <a href="@Model.Baseurl?ssoaction=config&tab=applicationlist">
+                        <div data-toggle="tooltip" title="Back to Application List" style="margin-right: 15px; font-weight: bolder; color: #0085ba;" class="bx bx-left-arrow-circle">
+                        </div>
+                    </a>
+                    Attribute/Role Mapping
+                </h1>
+
+            </div>
+            <ul class="app-breadcrumb breadcrumb">
+                <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+                <li class="breadcrumb-item"><a href="#">Attribute/Role Mapping</a></li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <div style="display: flex; gap: 1em; width: 100%; margin-left: 5px;">
+                <div class="tile col-lg-6 trial-border" style="width: 100%;">
+                    <div class="hovertext1" data-hover="The features listed below are available in the Premium+ version of the module. To find out more, kindly click the crown icon.">
+                        <a class="prem tags" style="position: absolute; right: 6px; font-size:16px; margin-top: -14px; color: goldenrod;" target="_blank" href="https://plugins.miniorange.com/asp-dot-net-saml-2-0-single-sign-sso-connector#plans"><img src="https://i.ibb.co/nzFYw3v/crown-1.png" style="width:40px; height:40px;"></a>
+                        <div class="row">
+                            <div style="margin-left: 10px;">
+                                <h3>
+                                    <label id="attribute-mapping">
+                                        Attribute Mapping
+
+                                    </label>
+                                </h3>
+                                <br>
+                                <input type="hidden" name="appconfig" value="true">
+                                <input type="hidden" name="idpname" value="@Model.Appid" />
+                                <div class="form-group">
+                                    <label for="nid">Username</label>
+                                    <input type="text" class="form-inline" name="nameid" id="nid" placeholder="NameID" value="NameID" readonly />
+                                    <label for="em">Email</label>
+                                    <input type="text" class="form-inline" name="email" id="em" placeholder="NameID" value="NameID" readonly />
+                                    <label for="first">Firstname</label>
+                                    @{
+                                        if (idpconfig != null && idpconfig.ContainsKey("firstname"))
+                                        {
+                                            <input type="text" class="form-inline" name="firstname" id="first" placeholder="Firstname" value="@idpconfig["firstname"]" disabled />
+                                        }
+                                        else
+                                        {
+                                            <input type="text" class="form-inline" name="firstname" id="first" placeholder="Firstname" value="" disabled />
+                                        }
+                                    }
+                                    <label for="last">LastName</label>
+                                    @{
+                                        if (idpconfig != null && idpconfig.ContainsKey("lastname"))
+                                        {
+                                            <input type="text" class="form-inline" name="lastname" id="first" placeholder="Lastname" value="@idpconfig["lastname"]" disabled />
+                                        }
+                                        else
+                                        {
+                                            <input type="text" class="form-inline" name="lastname" id="first" placeholder="Lastname" value="" disabled />
+                                        }
+                                    }
+                                </div>
+                                <h4><label>Custom Attribute Mapping</label></h4><br>
+                                <div data-role="dynamic-fields">
+                                    @{
+                                        if (Model.CustomAttributes != null && Model.CustomAttributes.Count > 0)
+                                        {
+                                            foreach (var item in Model.CustomAttributes)
+                                            {
+                                                <div class="form-inline">
+                                                    <div class="form-group" style="padding-bottom: 5px">
+                                                        <input type="text" class="form-control" id="attribute_name" name="attribute_name" placeholder="Attribute Name" value="@item.Key" style="text-align: center" />
+                                                        <span>&nbsp;&nbsp;&nbsp;</span>
+                                                        <input type="text" class="form-control" id="attribute_value" name="attribute_value" placeholder="Attribute Value" value="@item.Value" style="text-align: center" />
+                                                        <span>&nbsp;&nbsp;&nbsp;</span>
+                                                        <button class="btn btn-danger" data-role="remove" id="remove_button">
+                                                            <span class="glyphicon glyphicon-remove">x</span>
+                                                        </button>
+                                                        <button class="btn btn-primary" data-role="add" id="add_button">
+                                                            <span class="glyphicon glyphicon-plus">+</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <div class="form-inline">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="attribute_name" name="attribute_name" placeholder="Attribute Name" style="text-align: center" readonly />
+                                                    <span>&nbsp;&nbsp;&nbsp;</span>
+                                                    <input type="text" class="form-control" id="attribute_value" name="attribute_value" placeholder="Attribute Value" style="text-align: center" readonly />
+                                                    <span>&nbsp;&nbsp;&nbsp;</span>
+                                                    <button class="btn btn-danger" data-role="remove" disabled>
+                                                        <span class="glyphicon glyphicon-remove">x</span>
+                                                    </button>
+                                                    <button class="btn btn-primary" data-role="add" disabled>
+                                                        <span class="glyphicon glyphicon-plus">+</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+
+                                </div>
+                                <input type="submit" value="Save Attribute Mapping" class="btn btn-primary" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tile trial-border" style="width: 100%;">
+                    <div class="hovertext1" data-hover="The features listed below are available in the Premium+ version of the module. To find out more, kindly click the crown icon.">
+                        <a class="prem tags" style="position: absolute; right: 6px; font-size:16px; margin-top: -14px; color: goldenrod;" target="_blank" href="https://plugins.miniorange.com/asp-dot-net-saml-2-0-single-sign-sso-connector#plans"><img src="https://i.ibb.co/nzFYw3v/crown-1.png" style="width:40px; height:40px;"></a>
+                    <div class="row">
+                        <div class="" style="width:100%;">
+                            <form id='form1' action='@Model.PageURL?ssoaction=config&tab=attributeandrolemapping&appid=@Model.Appid&multitenant=@Model.isMultiTenant' method='post'>
+                                @Html.AntiForgeryToken()
+                                <div style="margin-left: 30px;">
+
+                                <input type="hidden" name="appconfig" value="true">
+                                <input type="hidden" name="idpname" value="@Model.Appid" />
+                                <h3>
+                                    <label>
+                                        Role Mapping
+
+                                    </label>
+                                </h3>
+                                <br>
+                            </div>
+                            <div class="form-group" style="margin-left:5%">
+                                <label for="last">Group Attribute Name</label>
+                                @{
+                                    if (idpconfig != null && idpconfig.ContainsKey("groupname"))
+                                    {
+                                        <input type="text" class="form-inline" name="groupname" id="last" placeholder="Group Attribute Name" style="" value="@idpconfig["groupname"]" disabled />
+                                    }
+                                    else
+                                    {
+                                        <input type="text" class="form-inline" name="groupname" id="last" placeholder="Group Attribute Name" style="" value="" disabled  />
+                                    }
+                                 }
+                                    <h4>
+                                        <label>
+                                            Custom Role Mapping
+                                            <div class="tooltipx" style="margin-left : -4px;">
+                                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
+                                                    <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"></path>
+
+                                                </svg>
+                                                <span class="tooltiptextx" style="--widthx : 250px">Extra IDPs role can be brought in the user session.</span>
+                                            </div>
+                                        </label>
+                                    </h4>
+                                    <div data-role="dynamic-fields">
+                                        @{
+                                            if (Model.CustomRoles != null && Model.CustomRoles.Count > 0)
+                                            {
+                                                foreach (var item in Model.CustomRoles)
+                                                {
+                                                    <div class="form-inline">
+                                                    <div class="form-group" style="padding-bottom: 5px">
+                                                        <input type="text" class="form-control" id="role_name" name="role_name" placeholder="Role Name" value="@item.Key" style="text-align: center" />
+                                                        <span>&nbsp;&nbsp;&nbsp;</span>
+                                                        <input type="text" class="form-control" id="role_value" name="role_value" placeholder="Role Value" value="@item.Value" style="text-align: center" />
+
+                                                        <span>&nbsp;&nbsp;&nbsp;</span>
+                                                        <button class="btn btn-danger" data-role="remove" id="remove_button">
+                                                            <span class="glyphicon glyphicon-remove">x</span>
+                                                        </button>
+                                                        <button class="btn btn-primary" data-role="add" id="add_button">
+                                                            <span class="glyphicon glyphicon-plus">+</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                }
+                                            }
+                                        else
+                                        {
+
+                                            <div class="form-inline">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="role_name" name="role_name" placeholder="Role Name" style="text-align: center" disabled="disabled" />
+                                                    <span>&nbsp;&nbsp;&nbsp;</span>
+                                                        <input type="text" class="form-control" id="role_value" name="role_value" placeholder="Role Value" style="text-align: center" disabled="disabled" />
+                                                    <span>&nbsp;&nbsp;&nbsp;</span>
+                                                        <button class="btn btn-danger" data-role="remove" disabled="disabled">
+                                                            <span class="glyphicon glyphicon-remove" >x</span>
+                                                    </button>
+                                                        <button class="btn btn-primary" data-role="add" disabled="disabled">
+                                                            <span class="glyphicon glyphicon-plus" >+</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                                <input type="submit" value="Save Role Mapping" class="btn btn-primary" disabled="disabled">
+                                </form>
+                            </div>
+                        </div>
+                        <br>
+                        <div id="domainrestrictiondiv" style="margin-left:5%;">
+                            <h4>
+                                <label style="">
+                                    Domain Restriction
+                                    <div class="tooltipx">
+                                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
+                                            <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"></path>
+
+                                        </svg>
+                                        <span class="tooltiptextx" style="--widthx : 250px">Restrict particular domains to avoid authentication</span>
+                                    </div>
+
+
+                                    <br>
+                                </label>
+                            </h4>
+                            <div class="form-group" style="">
+                                <label for="domainname">Domain Name</label>
+                                <input type="text" class="form-inline" id="domainname" placeholder="Domain Name" value="" style="" disabled>
+                                <div class="form-inline">
+                                    <label for="restrict">Restrict</label>
+                                    <div class="toggle-button-cover">
+
+                                        <div class="button r" id="button-1">
+                                            <input id="check" type="checkbox" class="checkbox">
+                                            <div class="knobs"></div>
+                                            <div class="layer"></div>
+                                        </div>
+
+                                    </div>
+                                    <script>
+                                        $("#check").change(function () {
+                                            if ($(this).prop("checked") == true) {
+                                                $("#domainname").val("Login will be allowed for the configured domains");
+                                            } else {
+                                                $("#domainname").val("");
+                                            }
+                                        });
+                                    </script>
+
+                                    <br>
+                                    <input type="submit" value="Save Domains" class="btn btn-primary" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
