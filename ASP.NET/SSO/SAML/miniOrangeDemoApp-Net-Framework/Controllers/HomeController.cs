@@ -21,7 +21,7 @@ namespace miniOrangeDemoApp_Net_Framework.Controllers
             {
                 ViewData["username"] = HttpContext.Session["username"];
             }
-            
+
             return View();
         }
 

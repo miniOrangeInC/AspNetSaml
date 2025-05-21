@@ -1,5 +1,6 @@
 ﻿@using Newtonsoft.Json;
 @using miniOrange.saml;
+@using miniOrange.saml.Utility;
 @model miniOrange.saml.Model.AdminLoginModel;
 
 @{
@@ -11,14 +12,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/solid.min.css" />
-    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/mo_maincss.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/Css/mo_maincss.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 </head>
 <body>
     <header class="app-header" style="padding-top:1em; width:102%;display:flex;justify-content:space-between">
         <div style="margin-left: 1em;">
-            <h3 style="font-weight:normal;"><img src="https://plugins.miniorange.com/wp-content/uploads/2022/05/dnn-miniorange-guide-logo.webp" style="width:6%; margin-right: 0.375em;"></img>miniOrange ASP.NET SAML SSO Middleware v7.0.4</h3>
+            <h3 style="font-weight:normal;"><img src="https://plugins.miniorange.com/wp-content/uploads/2022/05/dnn-miniorange-guide-logo.webp" style="width:6%; margin-right: 0.375em;"></img>miniOrange ASP.NET SAML SSO Middleware @Constants.Version</h3>
         </div>
         <div class="drpdwn" style="margin-right:1%">
             <button class="dropbtn">
@@ -40,7 +41,7 @@
         <div class="app-sidebar__user" style="padding-left: 40px">
             <div style="margin-left: 15px;">
                 <p class="app-sidebar__user-name">ASP.NET SAML</p>
-                <p class="app-sidebar__user-designation">Middleware v7.0.4</p>
+                <p class="app-sidebar__user-designation">Middleware @Constants.Version</p>
             </div>
         </div>
         <ul class="app-menu">
@@ -167,6 +168,12 @@
                                 window.location.href = appbaseurl + "?ssoaction=config&option=downloadLicenseKey";
                             }
 
+                            window.addEventListener("DOMContentLoaded", function () {
+                                const urlParams = new URLSearchParams(window.location.search);
+                                if (urlParams.get("autodownload") === "true") {
+                                    downloadlicensekey();
+                                }
+                            });
                         </script>
 
                     </div>

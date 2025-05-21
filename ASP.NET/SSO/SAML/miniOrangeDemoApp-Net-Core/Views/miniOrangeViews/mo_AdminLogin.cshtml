@@ -1,5 +1,6 @@
 ﻿@using miniOrange.saml;
 @model miniOrange.saml.Model.AdminLoginModel;
+@using miniOrange.saml.Utility;
 
 <html>
 <head>
@@ -7,7 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/solid.min.css">
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/mo_maincss.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/Css/mo_maincss.css" asp-append-version="true" />
     <style>
         #forgot-password-link 
         {
@@ -25,7 +26,7 @@
       <div class='cover'></div>
     </section>
     <form id='form1' action='@Model.Baseurl?ssoaction=config&option=login' method='post'>
-        @Html.AntiForgeryToken()
+        
         <section class='login-content'>
       <div class='col-md-6'>
                 <div class='tile'>

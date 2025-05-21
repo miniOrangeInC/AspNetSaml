@@ -1,5 +1,6 @@
 ﻿@using miniOrange.saml;
 @model miniOrange.saml.Model.AdminLoginModel;
+@using miniOrange.saml.Utility;
 
 @{
 
@@ -11,10 +12,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/solid.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.1/css/intlTelInput.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.1/js/intlTelInput.min.js"></script>
-
+    <script src="~/miniOrangeContent/Scripts/phoneValidation.js" asp-append-version="true"></script>
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/mo_maincss.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/Css/mo_maincss.css" asp-append-version="true" />
     <style>
         #forgot-password-link {
             text-align: center;
@@ -31,7 +32,6 @@
     <section class='material-half-bg'>
         <div class='cover'></div>
     </section>
-    @Html.AntiForgeryToken()
     <section class='login-content'>
         <div class='col-md-6'>
             <div class='tile'>
@@ -85,7 +85,7 @@
                                 <input type='submit' class='btn btn-primary' style='width:20%;' value='Register'>
                             </div>
                 </form>
-                <a href="@Model.Baseurl?ssoaction=config&option=have_account" style="align-content: center;">Already have an account? Login here</a>
+                <p>Already have an account? Login <a href="@Model.Baseurl?ssoaction=config&option=have_account" style="align-content: center;"> here</a></p>
             </div>
         </div>
 
@@ -93,35 +93,6 @@
         </div>
     </section>
 
-
 </body>
 
-<script>
-    const phoneInputField = document.querySelector("#phnNumber");
-    const errorElement = document.querySelector("#phnError");
-    const iti = window.intlTelInput(phoneInputField, {
-        initialCountry: "auto",
-        geoIpLookup: function (callback) {
-            fetch('https://ipapi.co/country/')
-                .then(res => res.text())
-                .then(callback)
-                .catch(() => callback("us"));
-        },
-        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.1.1/js/utils.js",
-        preferredCountries: ["us", "gb", "in"],
-        separateDialCode: true,
-    });
-
-    phoneInputField.addEventListener("input", () => {
-        if (iti.isValidNumber()) {
-            errorElement.style.display = "none";
-            phoneInputField.style.borderColor = "green";
-        } else {
-            errorElement.style.display = "block";
-            errorElement.textContent = "Invalid phone number format";
-            phoneInputField.style.borderColor = "red";
-        }
-    });
-
-</script>
 </html>

@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/solid.min.css">
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/mo_maincss.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/Css/mo_maincss.css" asp-append-version="true" />
     <style>
         {
             user-select: none;
@@ -114,7 +114,7 @@
 <body>
     <header class="app-header" style="padding-top:1em; width:102%;display:flex;justify-content:space-between">
         <div style="margin-left: 1em;">
-            <h3 style="font-weight:normal;"><img src="https://plugins.miniorange.com/wp-content/uploads/2022/05/dnn-miniorange-guide-logo.webp" style="width:6%; margin-right: 0.375em;"></img>miniOrange ASP.NET SAML SSO Middleware v7.0.4</h3>
+            <h3 style="font-weight:normal;"><img src="https://plugins.miniorange.com/wp-content/uploads/2022/05/dnn-miniorange-guide-logo.webp" style="width:6%; margin-right: 0.375em;"></img>miniOrange ASP.NET SAML SSO Middleware @Constants.Version</h3>
         </div>
         <div class="drpdwn" style="margin-right:1%;">
             <button class="dropbtn">
@@ -136,7 +136,7 @@
         <div class="app-sidebar__user" style="padding-left: 40px">
             <div style="margin-left: 15px;">
                 <p class="app-sidebar__user-name">ASP.NET SAML</p>
-                <p class="app-sidebar__user-designation">Middleware v7.0.4</p>
+                <p class="app-sidebar__user-designation">Middleware @Constants.Version</p>
             </div>
         </div>
         <ul class="app-menu">
@@ -180,7 +180,7 @@
                                 <div class="modal-body" style="margin: auto;padding: 30px;">
                                     <div id="mo_setup_call_layout" class="mo_support_layout">
                                         <form id="setupCallForm" name="setupCallForm" method="post" action="@Model.Baseurl?ssoaction=config&option=setupcall">
-                                            @Html.AntiForgeryToken()
+                                          
                                             <input type="hidden" name="option" value="mo_oauth_setup_call_option" />
                                             <table class="mo_settings_table" cellpadding="2" cellspacing="2">
                                                 <tr>

@@ -13,15 +13,18 @@ namespace miniOrangeDemoApp.Pages
 
         public void OnGet()
         {
-            if(HttpContext.User != null && HttpContext.User.Identity.IsAuthenticated)
+            if (!HttpContext.Response.HasStarted)
+            {
+                if (HttpContext.User == null || !HttpContext.User.Identity.IsAuthenticated || HttpContext.User.Identity.AuthenticationType.Equals("moAdmin"))
+                {
+                    Response.Redirect("/Login");
+                }
+            }
+            if (HttpContext.User != null && HttpContext.User.Identity.IsAuthenticated)
             {
                 ViewData["username"] = HttpContext.User.Identity.Name;
             }
-            if (HttpContext.User == null || !HttpContext.User.Identity.IsAuthenticated || HttpContext.User.Identity.AuthenticationType.Equals("moAdmin"))
-            {
-                Response.Redirect("/Login");
-            }
-
         }
+           
     }
 }
