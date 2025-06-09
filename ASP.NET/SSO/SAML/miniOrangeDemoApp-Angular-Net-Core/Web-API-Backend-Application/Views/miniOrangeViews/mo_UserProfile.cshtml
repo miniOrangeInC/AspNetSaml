@@ -1,0 +1,118 @@
+﻿@using miniOrange.saml;
+@using System.Security.Claims;
+@using Microsoft.AspNetCore.Authentication.Cookies;
+@using Microsoft.AspNetCore.Authentication;
+@model miniOrange.saml.Model.AdminLoginModel
+
+@{
+    string baseurl = Model.Baseurl;
+    bool isAuthenticated = User.Identity.IsAuthenticated;
+    IDictionary<string, string> userDetailsFromClaims = new Dictionary<string, string>();
+    string username = string.Empty;
+    string idpname = "";
+    string claimtype = "";
+    string claimvalue = "";
+    bool is_mo_saml_admin = false;
+    string authenticationScheme = User.Identity.AuthenticationType ?? "";
+    if (isAuthenticated)
+    {
+        var identity = (ClaimsIdentity)User.Identity;
+        username = identity.FindFirst(ClaimTypes.Name)?.Value
+                  ?? identity.FindFirst("username")?.Value
+                  ?? "Unknown User";
+
+
+        foreach (var claim in identity.Claims)
+        {
+            if (!claim.Type.Equals("saml_sso_verified", StringComparison.OrdinalIgnoreCase) && !claim.Type.Equals("idpname", StringComparison.OrdinalIgnoreCase))
+            {
+                userDetailsFromClaims[claim.Type] = claim.Value;
+            }
+            if (claim.Type.Equals("mo_saml_admin", StringComparison.OrdinalIgnoreCase))
+            {
+                is_mo_saml_admin = true;
+            }
+        }
+
+
+        idpname = identity.FindFirst("idpname")?.Value ?? "IDP Name not found";
+    }
+
+    var ssoLoginUrl = $"{baseurl}/?ssoaction=login&RelayState={baseurl}/?ssoaction=userprofile";
+    var ssoLogoutUrl = $"{baseurl}/?ssoaction=logout&RelayState={baseurl}/?ssoaction=userprofile";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/Css/UserProfile.css" asp-append-version="true" />
+
+</head>
+<body>
+
+
+    <div class="container">
+        <div class="header">
+            <!-- Left: Profile Container -->
+            <div class="profile-container">
+                @if (authenticationScheme.Equals("moAdmin", StringComparison.OrdinalIgnoreCase))
+                {
+                    <p>
+                        <b>Note:</b> To see the user details accessed from the claims using the integration code, please login.
+                    </p>
+                    <a href="@ssoLoginUrl" class="btn-login">Login with SSO</a>
+                }
+                else
+                {
+                    @if (isAuthenticated)
+                    {
+                        <div class="header-action">
+                            <h6>Hello, <b>@username!</b> You are logged in securely with <b>your IdP.</b></h6>
+
+                            <a href="@ssoLogoutUrl" class="btn-logout">Logout</a>
+                        </div>
+                        <h6 style="margin-top:30px">Below are the user details:-</h6>
+                        <table class="user-details-table">
+                            <thead>
+                                <tr>
+                                    <th>User Details:</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var detail in userDetailsFromClaims)
+                                {
+                                    <tr>
+                                        <td>@detail.Key</td>
+                                        <td>@detail.Value</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>
+                             <b>Note:</b> To see the user details accessed from the claims using the integration code, please login.
+                        </p>
+                        <a href="@ssoLoginUrl" class="btn-login">Login with SSO</a>
+
+                    }
+                }
+            </div>
+
+            <!-- Right: Image Container -->
+            <div class="login-image-container">
+                <div class="logo-container">
+                    <img src="miniOrangeContent/Images/miniOrange.webp" alt="MiniOrange Logo" class="logo" />
+                </div>
+                <img src="miniOrangeContent/Images/trial.jpg" alt="Login Image" class="login-image" />
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

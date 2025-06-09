@@ -1,9 +1,10 @@
 # SAML SSO Demo Applications for .NET Framework & .NET Core
 
-Welcome to the SAML SSO Demo Applications! 🚀 This repository contains two demo applications:
+Welcome to the SAML SSO Demo Applications! 🚀 This repository contains three demo applications:
 
 - 🌐 **A .NET Framework-based application**
 - 🌐 **A .NET Core-based application**
+- 🌐 **A Decoupled Architecure - Angular Frontend + .NET Core backend application**
 
 These prototype will demonstrate how to integrate SAML SSO using the **miniOrange NuGet package** into your .NET applications.
 
@@ -15,6 +16,7 @@ The ZIP file includes:
 
 - 📘 **miniOrangeDemoApp-Net-Framework**: The demo application for .NET Framework.
 - 📘 **miniOrangeDemoApp-Net-Core**: The demo application for .NET Core.
+- 📘 **miniOrangeDemoApp-Angular-Net-Core**: The demo application for Decoupled Achitecture (Angular + .NET Core Web API).
 - 📄 **README.md**: Instructions for running the demo applications.
 
 ---
@@ -45,6 +47,14 @@ Before running the demo applications, ensure the following:
 1. Click on the **"Configure-SSO"** button on the .NET Application Homepage.
 2. You will now see a plugin administrator dashboard to configure the SAML Settings between your application and your IDP.
 3. Follow the instructions from this [LINK](https://plugins.miniorange.com/asp-net-saml-sso-setup-guides) to complete the end-to-end SAML setup.
+
+---
+
+## 🖥️ Decoupled Architecture: Angular + .NET Core Web API
+
+For setup and run instructions for the decoupled Angular frontend and .NET Core Web API project, please refer to the dedicated README:
+
+[View Demo & Setup Guide](miniOrangeDemoApp-Angular-Net-Core/README.md)
 
 ---
 
