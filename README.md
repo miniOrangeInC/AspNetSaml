@@ -1,6 +1,21 @@
-# CwhTodoList2
+# MiniOrange SSO Angular Demo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.9.
+This project is a demo Angular application built to showcase Single Sign-On (SSO) integration using [miniOrange](https://www.miniorange.com/) with **any SAML 2.0 compliant Identity Provider (IdP)**.
+
+## Features
+- Seamless SSO login with any SAML 2.0 IdP (Azure AD, Okta, ADFS, Google, OneLogin, Ping, and more)
+- Secure token handling and user session management
+- Clean, modern UI/UX
+- Easy integration and extensibility
+- Comprehensive support and documentation
+
+## Setup Guide
+For a step-by-step guide to set up SAML SSO with miniOrange in ASP.NET Core, see:
+
+[ASP.NET Core SAML SSO Setup Guides](https://plugins.miniorange.com/asp-net-core-saml-sso-setup-guides)
+
+## About miniOrange
+miniOrange provides fast, secure, and user-friendly SSO solutions for all major platforms and identity providers. For more information, visit [miniorange.com](https://www.miniorange.com/).
 
 ## Development server
 
