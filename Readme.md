@@ -20,14 +20,6 @@
 - Secure, production-ready SSO implementation
 
 
-## 📦 Contents
-
-- 🟦 **miniOrangeDemoApp-Net-Framework**: SAML2 for ASP.NET example
-- 🟪 **miniOrangeDemoApp-Net-Core**: SAML2 for ASP.NET Core example
-- 🅰️ **miniOrangeDemoApp-Angular-Net-Core**: SAML2 authentication with Angular frontend and ASP.NET Core backend
-- 📄 **README.md**: This file, with setup instructions and SAML2 authentication examples
-
-
 ## ✅ Prerequisites
 
 Before running the demo applications, ensure the following:
