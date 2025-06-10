@@ -1,88 +1,133 @@
-# SAML SSO Demo Applications for .NET Framework & .NET Core
+# SAML2 for ASP.NET & ASP.NET Core Demo Application using miniOrange SSO Packages
 
-Welcome to the SAML SSO Demo Applications! 🚀 This repository contains three demo applications:
+**miniOrange SAML2 for ASP.NET and ASP.NET Core** provides seamless SAML2 authentication for your .NET applications. This repository contains example projects and guides for integrating SAML2 Single Sign-On (SSO) in ASP.NET, ASP.NET Core, and decoupled architectures (Angular + .NET Core backend).
 
-- 🌐 **A .NET Framework-based application**
-- 🌐 **A .NET Core-based application**
-- 🌐 **A Decoupled Architecure - Angular Frontend + .NET Core backend application**
+## 📦 Contents
 
-These prototype will demonstrate how to integrate SAML SSO using the **miniOrange NuGet package** into your .NET applications.
+- **miniOrangeDemoApp-Net-Framework**: SAML2 for ASP.NET example
+- **miniOrangeDemoApp-Net-Core**: SAML2 for ASP.NET Core example
+- **miniOrangeDemoApp-Angular-Net-Core**: SAML2 authentication with Angular frontend and ASP.NET Core backend
+- **README.md**: This file, with setup instructions and SAML2 authentication examples
 
----
 
-## 📂 Contents of the Zip File
+## 🚀 Features
 
-The ZIP file includes:
+- **SAML2 Authentication for ASP.NET and ASP.NET Core**
+- Easy integration with any SAML2 Identity Provider (IdP)
+- Supports .NET Framework, .NET Core, and decoupled Angular + .NET Core architectures
+- Example applications and step-by-step setup guides
+- Compatible with miniOrange Multi-Factor Authentication (MFA) product (MFA is not included in this module)
+- Secure, production-ready SSO implementation
 
-- 📘 **miniOrangeDemoApp-Net-Framework**: The demo application for .NET Framework.
-- 📘 **miniOrangeDemoApp-Net-Core**: The demo application for .NET Core.
-- 📘 **miniOrangeDemoApp-Angular-Net-Core**: The demo application for Decoupled Achitecture (Angular + .NET Core Web API).
-- 📄 **README.md**: Instructions for running the demo applications.
 
----
+## 📦 Contents
+
+- 🟦 **miniOrangeDemoApp-Net-Framework**: SAML2 for ASP.NET example
+- 🟪 **miniOrangeDemoApp-Net-Core**: SAML2 for ASP.NET Core example
+- 🅰️ **miniOrangeDemoApp-Angular-Net-Core**: SAML2 authentication with Angular frontend and ASP.NET Core backend
+- 📄 **README.md**: This file, with setup instructions and SAML2 authentication examples
+
 
 ## ✅ Prerequisites
 
 Before running the demo applications, ensure the following:
 
-1. **Visual Studio Installed**:
-   - 🛠️ Visual Studio 2013 or later is recommended.
-2. **NuGet Package**:
-   - 📦 Our SAML SSO NuGet package is pre-integrated into the applications. No manual installation is required.
+1. **Visual Studio Installed**: Visual Studio 2013 or later is recommended.
+2. **.NET Framework or .NET Core SDK**: Install the appropriate SDK for your target application (.NET Framework or .NET Core/5+/6+).
+3. **NuGet Package**: The miniOrange SAML SSO NuGet package is pre-integrated into the applications. No manual installation is required.
+4. **Administrator Access**: Required for configuring IIS Express and application permissions.
 
----
 
-## 🚀 Getting Started
+## 🛠️ Getting Started
 
-### Step 1️⃣: Open the Solution in Visual Studio of .NET Framework or .NET Core
+### SAML2 Authentication ASP.NET Example:
 
-- Open `miniOrangeDemoApp.sln` using Visual Studio.
+1. **Open the Solution**  
+   Open `miniOrangeDemoApp.sln` in Visual Studio.
 
-### Step 2️⃣: Run the Project through IIS Express in your Visual Studio
+2. **Run the Project**  
+   Use IIS Express to run the SAML2 ASP.NET or ASP.NET Core example.
 
-- Use IIS Express to run the project in your development environment.
+3. **Configure SAML2 SSO**  
+   - Click **"Configure-SSO"** on the homepage.
+   - Enter your SAML2 IdP details.
+   - Follow the on-screen instructions for SAML2 authentication setup.
 
-### Step 3️⃣: Configure SAML Settings
+### SAML2 for ASP.NET Core Example:
 
-1. Click on the **"Configure-SSO"** button on the .NET Application Homepage.
-2. You will now see a plugin administrator dashboard to configure the SAML Settings between your application and your IDP.
-3. Follow the instructions from this [LINK](https://plugins.miniorange.com/asp-net-saml-sso-setup-guides) to complete the end-to-end SAML setup.
+- The `miniOrangeDemoApp-Net-Core` project demonstrates SAML2 authentication in ASP.NET Core.
+- Supports .NET Core 3.1, .NET 5, .NET 6, and later.
 
----
+### 🅰️ Angular + .NET Core Demo Application:
 
-## 🖥️ Decoupled Architecture: Angular + .NET Core Web API
+This repository also includes a ready-to-use demo for integrating miniOrange SAML SSO with an Angular frontend and .NET Core Web API backend. The Angular app demonstrates:
+- SSO login flow from Angular
+- Secure API calls to .NET Core backend
+- End-to-end SAML authentication with any SAML-compliant IdP
 
-For setup and run instructions for the decoupled Angular frontend and .NET Core Web API project, please refer to the dedicated README:
+For details, see the [Angular Demo README](ASP.NET/SSO/SAML/miniOrangeDemoApp-Angular-Net-Core/README.md).
 
-[View Demo & Setup Guide](miniOrangeDemoApp-Angular-Net-Core/README.md)
 
----
+## ❓ Frequently Asked Questions (FAQ)
 
-## 🔄 Application Workflow
+**Q: What versions of .NET are supported?**  
+A: The solution supports .NET Framework, .NET Core, and .NET 5/6+ for both traditional and decoupled (Angular + .NET Core backend) architectures.
 
-1. Navigate to the application in your browser.
-2. Click the **"Login with SSO"** button to initiate the SAML SSO process.
-3. You will be redirected to your Identity Provider for authentication.
-4. After successful login, you will be redirected back to the application with user details.
+**Q: Is there a free trial or demo available?**  
+A: Yes, you can try the demo applications included in this repository. For more details or to request a full-featured trial, please contact [aspnetsupport@xecurify.com](mailto:aspnetsupport@xecurify.com).
 
----
+**Q: How is licensing handled?**  
+A: Licensing is instance-based and linked to the domain of your .NET application. For more details, visit the [official miniOrange ASP.NET SAML SSO page](https://plugins.miniorange.com/asp-net-saml-single-sign-on-sso#pricing-plans).
+
+**Q: Where can I get support?**  
+A: For technical support, email [aspnetsupport@xecurify.com](mailto:aspnetsupport@xecurify.com) or use the support form on the [miniOrange website](https://plugins.miniorange.com/asp-net-saml-single-sign-on-sso).
+
 
 ## 🛠️ Troubleshooting
 
-- **NuGet Package Issues**:
-  - Ensure the NuGet package is correctly installed and referenced.
-- **Debugging Logs**:
-  - Navigate to the **"TroubleShooting"** tab in the plugin under the **"Identity Provider Configuration"** and enable it to generate debugging logs to review SSO flow logs.
-- **FAQs**:
-  - Check out our Frequently Asked Questions (FAQs) using this [LINK](https://faq.miniorange.com/kb/asp-net/).
+To troubleshoot issues with SAML2 authentication:
+
+1. Go to the **Identity Provider Settings** section in your application.
+2. Navigate to the **Troubleshooting** tab under the Identity Provider configuration.
+3. Enable logging by turning on the logging switch.
+4. Reproduce the issue to generate logs. The logs will be written to `miniOrangelog.txt` in your application root directory.
+5. If `miniOrangelog.txt` is not writable, right-click the file, go to Properties > Security, and ensure the IIS App Pool user has 'Write' permission.
+6. Download the log and configuration files from the Troubleshooting tab and send them to [aspnetsupport@xecurify.com](mailto:aspnetsupport@xecurify.com) for assistance.
+
+
+## 🆘 Support
+
+Need help? We're here to assist:
+- **Email:** aspnetsupport@xecurify.com
+- **Support Portal:** [miniOrange Support](https://miniorange.com/contact)
+- **Documentation:** [Plugin Documentation](https://plugins.miniorange.com/)
+
+
+## 📚 Documentation & Resources
+
+- [MiniOrange ASP.NET Core SAML SSO Setup Guide](https://plugins.miniorange.com/asp-net-core-saml-sso-setup-guides)
+- [miniOrange FAQ](https://faq.miniorange.com)
+- [miniOrange Blogs](https://blogs.miniorange.com)
+- [Wikipedia: Security Assertion Markup Language (SAML)](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language)
+- [Microsoft: SAML Toolkit Documentation](https://learn.microsoft.com/en-us/entra/identity-platform/single-sign-on-saml-protocol)
+
+
+## 🏷️ Keywords
+
+`SAML` `SSO` `Single Sign-On` `Angular` `.NET Core` `Web API` `Identity Provider` `Authentication` `Security` `miniOrange` `Azure AD` `Okta` `Google Workspace` `ADFS`
+
+
+## 🤝 Contributing
+
+We welcome contributions! Please feel free to:
+- Report issues
+- Suggest improvements
+- Submit pull requests
+
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
-
-## 📞 Support
-
-If you encounter any issues or have questions, please contact our support team at 📧 **aspnetsupport@xecurify.com**.
-
----
-
-Thank you for using our SAML SSO solution! 🙌
 
