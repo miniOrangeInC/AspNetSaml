@@ -1,0 +1,51 @@
+miniOrange End-User License Agreement
+
+This End User License Agreement(EULA) is between you (‘either an individual or an entity / Customer’) and  Xecurify Inc (DBA miniOrange Security Software Private Limited).
+
+PLEASE READ THIS AGREEMENT BEFORE USING ANY XECURIFY SOFTWARE OR SERVICES. BY  DOWNLOADING, INSTALLING OR USING ANY XECURIFY SOFTWARE OR SERVICES YOU (“the Customer”) SIGNIFY ACCEPTANCE OF AND AGREE TO THE TERMS AND CONDITIONS OF THIS AGREEMENT.
+
+“Customer” or “you” agree to the terms of this Agreement. If you are entering into this Agreement on behalf of a company or other legal entity, you represent that you have the authority to bind such entity and its Affiliates to this Agreement. If you do not have such authority, or if you do not agree with these terms and conditions, you must not accept this Agreement and may not use the Service. This Agreement is effective as of that date that you accept it.
+
+1. GRANT OF LICENSE
+After you have purchased any paid License as advertised on the website/marketplace you or the Customer have received the file for the plugin version and are granted access to the license for the 12 months from the date of purchase including the maintenance(version updates, security fixes, compatibility issues) and basic email support. The licenses vary from subscription or perpetual  as mentioned on the plugin licensing/plans page or on miniOrange website.
+
+“Subscription License”, an annual payment to renew the license for regular updates and basic email support  at 50% of the license cost present at that time. You will be restricted to access the plugin functionality after 12 months from the date of the purchase.
+
+“Perpetual license”, a one-time payment to access the plugin functionality with restricted access to version updates and support.  To continue receiving the plugin version updates, security fixes and compatibility issues after 12 months, you can renew the plugin license at 50% of the license cost present at that time.
+
+You can install the plugin only into the number of website(s) corresponding to the plan you purchased. You may not duplicate the Plugin in whole or in part. You may not redistribute, modify or resell the Plugin in any way without the written permission of Xecurify Inc. You may not rent, lease, or lend the Plugin. You may not use the Plugin in any other Plugin or application that competes with products and services of Xecurify Inc. The technical support from the developers will be based on the active support plan renewed as per your business needs every year.
+
+2. YOUR MEMBERSHIP :
+During your purchase, we will create an account for you in our membership area. You must keep your login credentials secret. You may not distribute, give away, lend or re-sell it. We reserve the right to monitor levels of your membership activity and take any necessary action in the event of abnormal usage being detected.
+
+3. VERSION CHECK AND REGISTRATION :
+Service Provider automatically checks for updates to its core and all installed themes and Plugins. After you have purchased the Paid License, you will be provided with a unique license key. By entering your license key and registering the domain with the Plugin, you can update the Plugin in your Service Provider’s dashboard. You must keep your license key secret. You may not distribute, give away, lend or re-sell it. We reserve the right to monitor levels of your key usage activity and take any necessary action in the event of abnormal usage being detected. * The word “Service Provider” means WordPress, Joomla, Drupal, AWS, Salesforce, etc.
+
+4. PRIVACY TERMS :
+Xecurify Server doesn’t collect & store any personal data except registration & license data, Xecurify plugin serves for the login/transaction between your application/website and Identity Provider.
+
+5. RESTRICTIONS :
+Prohibition on Reverse Engineering, Decompilation, and Disassembly. You may not reverse engineer, decompile or disassemble the Plugin in any way without the written permission of Xecurify Inc.
+
+6. PROHIBITED USE :
+You may not use the Plugin on website(s) and/or webpage(s) that contain inappropriate, unlawful, illegal or offensive content.
+
+7. TERMINATION :
+Without prejudice to any other rights, Xecurify Inc. may terminate this EULA if you fail to comply with the terms and conditions of this EULA. In such an event, you must destroy all copies of the Plugin.
+
+8. REFUND POLICY :
+At Xecurify, you will only be able to receive the refund under all the following circumstances a) you have raised the request within 10 working days from the date of the purchase  b) if the plugin or the features you have have purchased is not working as advertised on the website/ marketplace c) you have attempted to resolve the issues with our support team d) you have purchased the wrong license or Xecurify/miniOrange product
+
+You are not eligible for the refund under all the following circumstances a) the plugin or the software is not working due to customer environmental changes b) you no longer require the plugin after the purchase c) you are not able to make any custom changes into the licensed plugin d) you have willingly purchased the plugin after taking the demo/trial from support team and if does not fit into your requirements. Please email us at info@xecurify.com for any queries regarding the return policy.
+
+9. COPYRIGHT :
+The Plugin is owned by Xecurify Inc. and is protected by copyright laws and international copyright treaties, as well as other intellectual property laws and treaties. The Plugin is licensed, not sold, to You for use solely subject to the terms and conditions of this Agreement.
+
+10. LIMITED WARRANTY :
+THE PLUGIN IS PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT WILL THE AUTHOR or AUTHORS BE LIABLE TO YOU FOR ANY DAMAGES, INCLUDING INCIDENTAL OR CONSEQUENTIAL DAMAGES, ARISING OUT OF THE USE OF THE PLUGIN, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. YOU ACKNOWLEDGE THAT YOU HAVE READ THIS LICENSE, UNDERSTAND IT AND AGREE TO BE BOUND BY ITS TERMS AS THE COMPLETE AND EXCLUSIVE STATEMENT OF THE AGREEMENT BETWEEN US, SUPERSEDING ANY PROPOSAL OR PRIOR AGREEMENT, ORAL OR WRITTEN, AND ANY OTHER COMMUNICATIONS BETWEEN US RELATING TO THE SUBJECT MATTER OF THIS LICENSE.
+
+11. LIMITATION OF LIABILITY :
+IN NO EVENT SHALL Xecurify Inc. OR ITS SUPPLIERS BE LIABLE TO YOU FOR ANY CONSEQUENTIAL, SPECIAL, INCIDENTAL, OR INDIRECT DAMAGES OF ANY KIND ARISING OUT OF THE DELIVERY, PERFORMANCE, OR USE OF THE PLUGIN, EVEN IF Xecurify Inc. HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. ALL LEGAL ISSUE SHOULD BE JUDGED BY THE COURT INDICATED BY Xecurify Inc.
+
+12. CHANGES TO THIS AGREEMENT :
+WE RESERVE THE RIGHTS TO MAKE CHANGES TO THIS AGREEMENT WITHOUT ANY PRIOR NOTICE AT OUR SOLE DISCRETION.

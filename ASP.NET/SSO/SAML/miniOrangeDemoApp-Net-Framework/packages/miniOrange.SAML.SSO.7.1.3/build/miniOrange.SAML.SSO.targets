@@ -1,0 +1,16 @@
+<Project>
+  <ItemGroup>
+    <Views Include="$(MSBuildThisFileDirectory)/../mocontent/Views/miniOrangeViews/**/*.*" PackagePath="mocontent/**/*.*" />
+    <Css Include="$(MSBuildThisFileDirectory)/../mocontent/miniOrangeContent/Css/*.*" PackagePath="mocontent/**/*.*" />
+    <Images Include="$(MSBuildThisFileDirectory)/../mocontent/miniOrangeContent/Images/*.*" PackagePath="mocontent/**/*.*" />
+    <Scripts Include="$(MSBuildThisFileDirectory)/../mocontent/miniOrangeContent/Scripts/*.*" PackagePath="mocontent/**/*.*" />
+  </ItemGroup>
+
+  <Target Name="CopyContentFiles" AfterTargets="Build" Condition="'$(TargetFramework)' == 'net5.0' Or '$(TargetFramework)' == 'net6.0' Or '$(TargetFramework)' == 'net7.0' Or '$(TargetFramework)' == 'net8.0' Or '$(TargetFramework)' == 'net9.0' Or '$(TargetFramework)' == 'netcoreapp3.1'">
+    <Copy SourceFiles="@(Views)" DestinationFolder="$(MSBuildProjectDirectory)\Views\miniOrangeViews" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(Css)" DestinationFolder="$(MSBuildProjectDirectory)\wwwroot\miniOrangeContent\Css" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(Scripts)" DestinationFolder="$(MSBuildProjectDirectory)\wwwroot\miniOrangeContent\Scripts" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(Images)" DestinationFolder="$(MSBuildProjectDirectory)\wwwroot\miniOrangeContent\Images" SkipUnchangedFiles="true" />
+  </Target>
+ 
+</Project>
