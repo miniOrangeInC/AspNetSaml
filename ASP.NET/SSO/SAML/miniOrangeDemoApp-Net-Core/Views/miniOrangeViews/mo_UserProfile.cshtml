@@ -12,7 +12,6 @@
     string idpname = "";
     string claimtype = "";
     string claimvalue = "";
-    bool is_mo_saml_admin = false;
     string authenticationScheme = User.Identity.AuthenticationType ?? "";
     if (isAuthenticated)
     {
@@ -27,10 +26,6 @@
             if (!claim.Type.Equals("saml_sso_verified", StringComparison.OrdinalIgnoreCase) && !claim.Type.Equals("idpname", StringComparison.OrdinalIgnoreCase))
             {
                 userDetailsFromClaims[claim.Type] = claim.Value;
-            }
-            if (claim.Type.Equals("mo_saml_admin", StringComparison.OrdinalIgnoreCase))
-            {
-                is_mo_saml_admin = true;
             }
         }
 
@@ -47,16 +42,15 @@
 <head>
     <title>User Profile Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/Css/UserProfile.css" asp-append-version="true" />
-
+    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/css/bootstrap4.5.2.min.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/css/UserProfile.css" asp-append-version="true" />
+    <script src="~/miniOrangeContent/Scripts/jquery.min.js" type="text/javascript" asp-append-version="true"></script>
 </head>
 <body>
 
 
     <div class="container">
         <div class="header">
-            <!-- Left: Profile Container -->
             <div class="profile-container">
                 @if (authenticationScheme.Equals("moAdmin", StringComparison.OrdinalIgnoreCase))
                 {
@@ -104,7 +98,6 @@
                 }
             </div>
 
-            <!-- Right: Image Container -->
             <div class="login-image-container">
                 <div class="logo-container">
                     <img src="miniOrangeContent/Images/miniOrange.webp" alt="MiniOrange Logo" class="logo" />

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SSOUserProfile.aspx.cs" Inherits="samldll.UserProfile" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SSOUserProfile.aspx.cs" Inherits="miniorangesamlsso.UserProfile" %>
 
 <!DOCTYPE html>
 

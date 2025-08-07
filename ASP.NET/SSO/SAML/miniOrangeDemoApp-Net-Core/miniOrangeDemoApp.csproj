@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="miniOrange.SAML.SSO" Version="7.1.3" />
+    <PackageReference Include="miniOrange.SAML.SSO" Version="7.1.5" />
   </ItemGroup>
 
 </Project>

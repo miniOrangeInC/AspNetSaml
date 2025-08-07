@@ -1,7 +1,0 @@
-<configuration>
-  <system.webServer>
-    <modules>
-      <add name="APIFilter" type="miniorangesamlsso.APIFilter" preCondition="managedHandler"/>
-    </modules>
-  </system.webServer>
-</configuration>

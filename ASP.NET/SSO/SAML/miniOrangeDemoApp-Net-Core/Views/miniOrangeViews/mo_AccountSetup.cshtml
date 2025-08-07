@@ -9,13 +9,13 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
-    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/solid.min.css" />
-    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/Css/mo_maincss.css" asp-append-version="true" />
-    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/Css/AppsList.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="~/miniOrangeContent/css/all.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/miniOrangeContent/css/boxicons.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/miniOrangeContent/css/solid.min.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/css/mo_maincss.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/css/AppsList.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/miniOrangeContent/css/font-awesome.min.css" asp-append-version="true" />
+    <script src="~/miniOrangeContent/Scripts/jquery.min.js" type="text/javascript" asp-append-version="true"></script>
 </head>
 <body onload="check_license_popup()">
     <header class="app-header" style="padding-top:1em; width:102%;display:flex;justify-content:space-between">
@@ -112,7 +112,7 @@
                 <div class="tile">
                     <div class="row">
                         <div class="col-lg-6">
-                            @if (Model.isTrialLicenseVerified)
+                            @if (Model.isTrialLicenseVerified && !Model.isLicenseExpired)
                             {
                                 <form id="form1" action="@Model.Baseurl?ssoaction=config" method="post">
                                     <input type="hidden" name="license" value="true">

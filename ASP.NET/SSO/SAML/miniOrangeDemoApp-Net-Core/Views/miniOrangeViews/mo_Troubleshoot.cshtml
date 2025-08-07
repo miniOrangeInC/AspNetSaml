@@ -1,6 +1,8 @@
-﻿@using Newtonsoft.Json;
+﻿@using Microsoft.AspNetCore.Html;
 @using miniOrange.saml;
+@using miniOrange.saml.Model;
 @using miniOrange.saml.Utility;
+@using Newtonsoft.Json;
 @model miniOrange.saml.Model.AppConfigModel;
 
 @{
@@ -60,14 +62,14 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
-    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/solid.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/Css/mo_maincss.css" asp-append-version="true" />
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/Css/mo_maincss.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/css/all.min.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/css/boxicons.min.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/css/solid.min.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/css/font-awesome.min.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/miniOrangeContent/css/mo_maincss.css" asp-append-version="true" />
+    <script src="~/miniOrangeContent/Scripts/jquery.min.js" type="text/javascript" asp-append-version="true"></script>
     <style>
         #forgot-password-link {
             text-align: center;
@@ -190,9 +192,6 @@
             color: #dc3545;
         }
     </style>
-
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 </head>
 <body>
     <header class="app-header" style="padding-top:1em; width:102%;display:flex;justify-content:space-between">
