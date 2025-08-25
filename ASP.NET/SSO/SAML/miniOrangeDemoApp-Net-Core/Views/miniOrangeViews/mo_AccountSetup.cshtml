@@ -151,7 +151,14 @@
                                         </div>
                                         @if (!String.IsNullOrEmpty(Model.Error_Message))
                                         {
-                                            <div class="error"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>@Model.Error_Message</div>
+                                            <div class="custom-alert">
+                                                <div class="alert-content">
+                                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                                    <div class="alert-text">
+                                                        <span>@Model.Error_Message</span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         }
                                         <ol>
                                             <li> It"s a <b>14 days</b> free trial.</li>

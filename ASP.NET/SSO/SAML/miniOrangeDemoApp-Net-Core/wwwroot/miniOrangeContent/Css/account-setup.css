@@ -1,0 +1,29 @@
+#account-info td, #account-info th, #license-info td, #license-info th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#account-info, #license-info {
+    width: 50%;
+}
+
+    #account-info tr td:first-child, #license-info tr td:first-child {
+        font-weight: bold;
+    }
+
+    #account-info tr:nth-child(even),
+    #license-info tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #account-info tr:hover, #license-info tr:hover {
+        background-color: #ddd;
+    }
+
+    #account-info th, #license-info th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #04AA6D;
+        color: white;
+    }
