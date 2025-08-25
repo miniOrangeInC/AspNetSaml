@@ -17265,3 +17265,34 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"] {
     -moz-appearance: textfield; 
 }
+
+.custom-alert {
+    color: #721c24;
+    margin-bottom: 20px;
+}
+
+    .custom-alert .alert-content {
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .custom-alert i {
+        font-size: 18px;
+        margin-right: 10px;
+        color: #dc3545;
+        margin-top: 2px;
+        flex-shrink: 0;
+    }
+
+    .custom-alert .alert-text {
+        flex: 1;
+        min-width: 0;
+        line-height: 1.4;
+    }
+
+        .custom-alert .alert-text strong {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 4px;
+        }
